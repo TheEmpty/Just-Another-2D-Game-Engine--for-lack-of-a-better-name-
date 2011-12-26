@@ -1,0 +1,37 @@
+/**
+ * @file STYLE
+ * @brief Simple style guide for C++ code in this project
+ *
+ * @author Mohammad El-Abid adapted from http://standards.codecutter.org/
+ * @date 12/25/2011
+ */
+
+// Alphabetical, case independent
+#import "A.h"
+#impoer "Z.h"
+
+// Refrain from definitions and global variables
+class StyleGuide
+{
+private:
+	const int MY_CONST = 1;
+	int my_var;
+
+public:
+	/**
+	 * @brief Calculates a hat size based on height and weight
+	 *
+	 * @param numberThe height in inches.
+	 * @param weight The weight in pounds.
+	 * @return The hat size in inches.
+	 */
+	double calcHatSize( double height, double weight );
+};
+
+StyleGuide::calcHatSize( double height, double weight )
+{
+	if( height == 0 )
+		return 0; // skip brackets if not needed (saves 2 lines on screen)
+	else
+		return height;
+}
