@@ -124,9 +124,17 @@ void clean_up(SDL_Surface* screen)
  */
 void setResourcePath( char executablePath[] )
 {
-    // ../application folder/platformer(.exe)
+    // ../application folder/platformer
+    // ..\application folder\platformer.exe
     std::string path(executablePath);
-    path = path.substr(0, path.find_last_of("/")); // remove binary item
+    // remove binary item
+#ifndef _WIN32
+    path = path.substr(0, path.find_last_of("/"));
+#endif
+#ifdef _WIN32
+    path = path.substr(0, path.find_last_of("\\"));
+#endif
+
 #if _WIN32
     Helper::resourcePath = path;
 #endif
