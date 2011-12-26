@@ -1,4 +1,5 @@
 // KEPT AS REFRENCE
+/*
 
 #include "Camera.h"
 #include "Helper.h"
@@ -22,10 +23,10 @@ private:
     int total_sprites;
     int total_tiles;
     bool loaded;
-    void Map::make_clips();
+    void make_clips();
 
 public:
-    Map::Map(std::string filename);
+    Map(std::string filename);
     bool is_loaded();
     SDL_Surface* get_tileset();
     void show(SDL_Surface* screen, Camera* cam);
@@ -38,3 +39,5 @@ public:
 };
 
 #endif MAP_H
+
+*/

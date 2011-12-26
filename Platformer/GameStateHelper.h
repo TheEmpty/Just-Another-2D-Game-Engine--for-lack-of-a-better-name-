@@ -45,14 +45,14 @@ public:
     }
 
     // Current state ID.
-    int GameStateHelper::stateID;
+    int stateID;
     // Set to the next state ID, waiting to be proccessed by external code.
-    int GameStateHelper::nextState;
+    int nextState;
 
     /**
      * @breif Returns pointer to current state object.
      */
-    GameState* GameStateHelper::currentState;
+    GameState* currentState;
 
     /**
      * @brief Change the next state ID, thus queueing the change. But don't overwrite an exit state

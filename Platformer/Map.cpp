@@ -1,5 +1,8 @@
 // KEPT AS REFRENCE
 
+
+/*
+ 
 #include "Map.h"
 
 Map::Map( std::string filename )
@@ -218,9 +221,9 @@ int Map::get_tile_height()
 /*void Map::get_tiles(Tile **pointer)
 {
     *pointer = tiles;
-}*/
+}*/ /*
 
 int Map::get_total_tiles()
 {
     return total_tiles;
-}
+} */

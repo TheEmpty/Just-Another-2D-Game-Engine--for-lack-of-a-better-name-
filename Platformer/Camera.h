@@ -24,17 +24,17 @@ public:
      * @param width The width of the view.
      * @param height The height of the view.
      */
-    Camera::Camera(int x = 0, int y = 0, int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT);
+    Camera(int x = 0, int y = 0, int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT);
 
     /**
-     * @brief Updates values passed that are not NULL.
+     * @brief Mass update values of the internal SDL_Rect
      *
      * @param x X position of camera with 0 being the left most pixel.
      * @param y Y position of camera with 0 being the top most pixel.
      * @param w The width of the view
      * @param h The height of the view
      */
-    void update(int x = NULL, int y = NULL, int w = NULL, int h = NULL);
+    void update(int x, int y, int w, int h);
 
     /**
      * @brief Copies the cordnates of an SDL_Rect for the camera's x, y and viewing w, h.

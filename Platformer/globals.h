@@ -32,4 +32,4 @@ enum GameStates
     STATE_EXIT,
 };
 
-#endif  DEFINITIONS_H // endif
+#endif // DEFINITIONS_H

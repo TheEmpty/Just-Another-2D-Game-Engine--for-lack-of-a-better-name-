@@ -48,12 +48,12 @@ public:
      * @param selectedC Color of text for selected menu items.
      * @param length The number of entries in the menu. "Play", "Settings", "Credit" would be 3.
      */
-    Menu::Menu( TTF_Font *font, SDL_Color defaultC, SDL_Color selectedC, int length );
+    Menu( TTF_Font *font, SDL_Color defaultC, SDL_Color selectedC, int length );
 
     /**
      * @brief Unloads dynamic arrays.
      */
-    Menu::~Menu();
+    ~Menu();
 
     /**
      * @brief Sets the text for a menu item.

@@ -9,10 +9,6 @@
 
 // following is a suggested order
 
-// 12/25/11
-// TODO: soft tabs
-// TODO: GIT (setup ignores)
-
 // TODO: screen scaling
 // TODO: load map (meta data, tileset(s) data, tile data (collision), map data, events (scripting)
 // TODO: Player in map (physics, control, gamepad, multiplayer)
@@ -20,6 +16,7 @@
 // TODO: create maps
 // TODO: Mac OS X port (should just involve setting the delegate up [also debug])
 // TODO: Cutscene scripting
+// TODO: GUI overlays
 // TODO: AI Scripting
 // TODO: audio
 // TODO: better sprites

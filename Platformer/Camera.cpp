@@ -17,14 +17,10 @@ Camera::Camera( int x, int y, int w, int h )
 
 void Camera::update( int x, int y, int h, int w )
 {
-    if( x != NULL )
-        view.x = x;
-    if( y != NULL )
-        view.y = y;
-    if( h != NULL )
-        view.h = h;
-    if( w != NULL )
-        view.w = w;
+    view.x = x;
+    view.y = y;
+    view.h = h;
+    view.w = w;
 }
 
 void Camera::set_view( SDL_Rect box )

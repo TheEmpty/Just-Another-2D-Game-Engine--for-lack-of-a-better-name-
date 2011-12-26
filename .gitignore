@@ -3,3 +3,4 @@ Release/*
 ipch/*
 Platformer/Debug/*
 Platformer/Release/*
+.DS_Store
