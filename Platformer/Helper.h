@@ -9,7 +9,7 @@
 #include <string>
 
 #ifdef _WIN32
-#include <Windows.h>
+#include <Windows.h> // OutputDebugString
 #endif // _WIN32
 
 #ifndef HELPER_H
@@ -17,6 +17,16 @@
 
 namespace Helper
 {
+    extern std::string resourcePath;
+    
+    /**
+     * @brief Returns the proper path for a resource
+     *
+     * @param path to the item if relative path is the source folder
+     * @return std::string the path to load
+     */
+    std::string get_path_for_resource( std::string filename );
+    
     /**
      * @brief Loads a BMP image onto a SDL_Surface.
      *

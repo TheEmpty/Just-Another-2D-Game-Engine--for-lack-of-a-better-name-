@@ -13,7 +13,7 @@ Title::Title( TTF_Font* newFont, int newPadding )
     font = newFont;
     padding = newPadding;
     
-    background = Helper::load_image( "images/title.bmp" );
+    background = Helper::load_image( Helper::get_path_for_resource("images/title.bmp") );
     
     // Menu
     menu = new Menu( font, defaultFontColor, activeFontColor, 4 );

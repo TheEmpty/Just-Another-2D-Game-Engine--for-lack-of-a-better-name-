@@ -13,7 +13,7 @@ Intro::Intro( TTF_Font* newFont ) // take font
     font = newFont;
 
     //Load the background
-    background = Helper::load_image( "images/intro.bmp" );
+    background = Helper::load_image( Helper::get_path_for_resource("images/intro.bmp").c_str() );
     message = TTF_RenderText_Solid( font, "Version 0.0.5", defaultFontColor );
 
     //Monitor how long they have looked at the version

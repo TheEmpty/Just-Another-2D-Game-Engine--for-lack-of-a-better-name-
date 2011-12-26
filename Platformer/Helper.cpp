@@ -7,6 +7,11 @@
 
 #include "Helper.h"
 
+namespace Helper
+{
+    std::string resourcePath;
+}
+
 std::string Helper::lower_case( std::string orginal )
 {
     std::string dupe = orginal;
@@ -21,6 +26,17 @@ std::string Helper::lower_case( std::string orginal )
     }
     
     return dupe;
+}
+
+std::string Helper::get_path_for_resource( std::string item )
+{
+#ifdef __APPLE__
+    // XCode removes all of our folders and puts all files into one resource folder
+    int last_index = item.find_last_of("/");
+    if(last_index != -1)
+        item = item.substr( last_index, item.length() - last_index); // take only the file name
+#endif
+    return resourcePath + "/" + item;
 }
 
 // This function was written by "Lazy Foo" and taken from his site (lazyfoo.net) with permission
@@ -78,5 +94,8 @@ void Helper::debug( int bufferSize, char* msg, ... )
     va_end( arg );
 #ifdef _WIN32
     OutputDebugString(buffer);
+#endif
+#ifdef __APPLE__
+    printf(buffer);
 #endif
 }

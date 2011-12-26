@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11C0189514A83108008F189A /* intro.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 11C0189014A83108008F189A /* intro.bmp */; };
+		11C0189614A83108008F189A /* player.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 11C0189114A83108008F189A /* player.bmp */; };
+		11C0189714A83108008F189A /* sheet0.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 11C0189214A83108008F189A /* sheet0.bmp */; };
+		11C0189814A83108008F189A /* title.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 11C0189314A83108008F189A /* title.bmp */; };
+		11C0189914A83108008F189A /* Squada One.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11C0189414A83108008F189A /* Squada One.ttf */; };
 		11C16C8714A81BA100653A8A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7114A81BA100653A8A /* Camera.cpp */; };
 		11C16C8814A81BA100653A8A /* Credits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7314A81BA100653A8A /* Credits.cpp */; };
 		11C16C8914A81BA100653A8A /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7814A81BA100653A8A /* Helper.cpp */; };
@@ -43,6 +48,11 @@
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		11C0189014A83108008F189A /* intro.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = intro.bmp; sourceTree = "<group>"; };
+		11C0189114A83108008F189A /* player.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = player.bmp; sourceTree = "<group>"; };
+		11C0189214A83108008F189A /* sheet0.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = sheet0.bmp; sourceTree = "<group>"; };
+		11C0189314A83108008F189A /* title.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = title.bmp; sourceTree = "<group>"; };
+		11C0189414A83108008F189A /* Squada One.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Squada One.ttf"; path = "Platformer/Squada One.ttf"; sourceTree = "<group>"; };
 		11C16C7114A81BA100653A8A /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = Platformer/Camera.cpp; sourceTree = "<group>"; };
 		11C16C7214A81BA100653A8A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = Platformer/Camera.h; sourceTree = "<group>"; };
 		11C16C7314A81BA100653A8A /* Credits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Credits.cpp; path = Platformer/Credits.cpp; sourceTree = "<group>"; };
@@ -91,28 +101,28 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				11C16C7914A81BA100653A8A /* Helper.h */,
-				11C16C7114A81BA100653A8A /* Camera.cpp */,
 				11C16C7214A81BA100653A8A /* Camera.h */,
-				11C16C7314A81BA100653A8A /* Credits.cpp */,
 				11C16C7414A81BA100653A8A /* Credits.h */,
 				11C16C7514A81BA100653A8A /* GameState.h */,
 				11C16C7614A81BA100653A8A /* GameStateHelper.h */,
 				11C16C7714A81BA100653A8A /* globals.h */,
-				11C16C7814A81BA100653A8A /* Helper.cpp */,
-				11C16C7A14A81BA100653A8A /* Intro.cpp */,
+				11C16C7914A81BA100653A8A /* Helper.h */,
 				11C16C7B14A81BA100653A8A /* Intro.h */,
-				11C16C7C14A81BA100653A8A /* main.cpp */,
-				11C16C7D14A81BA100653A8A /* Map.cpp */,
 				11C16C7E14A81BA100653A8A /* Map.h */,
-				11C16C7F14A81BA100653A8A /* Menu.cpp */,
 				11C16C8014A81BA100653A8A /* Menu.h */,
 				11C16C8114A81BA100653A8A /* SDLMain.h */,
+				11C16C8414A81BA100653A8A /* Timer.h */,
+				11C16C8614A81BA100653A8A /* Title.h */,
+				11C16C7114A81BA100653A8A /* Camera.cpp */,
+				11C16C7314A81BA100653A8A /* Credits.cpp */,
+				11C16C7814A81BA100653A8A /* Helper.cpp */,
+				11C16C7A14A81BA100653A8A /* Intro.cpp */,
+				11C16C7C14A81BA100653A8A /* main.cpp */,
+				11C16C7F14A81BA100653A8A /* Menu.cpp */,
+				11C16C7D14A81BA100653A8A /* Map.cpp */,
 				11C16C8214A81BA100653A8A /* SDLMain.m */,
 				11C16C8314A81BA100653A8A /* Timer.cpp */,
-				11C16C8414A81BA100653A8A /* Timer.h */,
 				11C16C8514A81BA100653A8A /* Title.cpp */,
-				11C16C8614A81BA100653A8A /* Title.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -134,6 +144,18 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		11C0188F14A83108008F189A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				11C0189014A83108008F189A /* intro.bmp */,
+				11C0189114A83108008F189A /* player.bmp */,
+				11C0189214A83108008F189A /* sheet0.bmp */,
+				11C0189314A83108008F189A /* title.bmp */,
+			);
+			name = images;
+			path = Platformer/images;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -167,6 +189,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11C0188F14A83108008F189A /* images */,
+				11C0189414A83108008F189A /* Squada One.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -234,6 +258,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				11C0189514A83108008F189A /* intro.bmp in Resources */,
+				11C0189614A83108008F189A /* player.bmp in Resources */,
+				11C0189714A83108008F189A /* sheet0.bmp in Resources */,
+				11C0189814A83108008F189A /* title.bmp in Resources */,
+				11C0189914A83108008F189A /* Squada One.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,7 +53,7 @@ static NSString *getApplicationName(void)
     
     if (![appName length])
         appName = [[NSProcessInfo processInfo] processName];
-
+    
     return appName;
 }
 

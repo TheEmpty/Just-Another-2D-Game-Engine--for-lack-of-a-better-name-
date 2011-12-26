@@ -14,7 +14,6 @@
 // TODO: Player in map (physics, control, gamepad, multiplayer)
 // THOUGHT: in multiplayer, would the camera follow player 1 or find the midpoint of the everyone and prevent them from leaving camera?
 // TODO: create maps
-// TODO: Mac OS X port (should just involve setting the delegate up [also debug])
 // TODO: Cutscene scripting
 // TODO: GUI overlays
 // TODO: AI Scripting
@@ -33,7 +32,7 @@
 #include "SDL_ttf.h"
 #include "Timer.h"
 #include "Title.h"
-
+#include <string>
 
 GameStateHelper* state_helper = GameStateHelper::Instance();
 
@@ -90,7 +89,7 @@ SDL_Surface* init()
         return NULL;
 
     // Open our font
-    font = TTF_OpenFont( "Squada One.ttf", 36 );
+    font = TTF_OpenFont( Helper::get_path_for_resource("Squada One.ttf").c_str(), 36 );
     if( font == NULL)
         return NULL;
 
@@ -121,6 +120,23 @@ void clean_up(SDL_Surface* screen)
 }
 
 /**
+ * @brief Sets the resource path for the application.
+ */
+void setResourcePath( char executablePath[] )
+{
+    // ../application folder/platformer(.exe)
+    std::string path(executablePath);
+    path = path.substr(0, path.find_last_of("/")); // remove binary item
+#if _WIN32
+    Helper::resourcePath = path;
+#endif
+#if __APPLE__
+    path = path.substr(0, path.find_last_of("/")); // remove MacOS folder
+    Helper::resourcePath = path + "/Resources"; // add resources folder
+#endif
+}
+
+/**
  * @brief Calls initalizing code, then constantly runs the state management at FRAMES_PER_SECOND
  *
  * @param argc Argument count, length of follow paramter.
@@ -129,6 +145,8 @@ void clean_up(SDL_Surface* screen)
  */
 int main( int argc, char* args[] )
 {
+    setResourcePath(args[0]);
+    
     SDL_Surface* screen = init();
     if( screen == NULL )
         return 1;
