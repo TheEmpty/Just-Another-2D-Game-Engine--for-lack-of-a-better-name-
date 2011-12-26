@@ -1,5 +1,6 @@
+Release/Platformer.pdb
+Release/Platformer.exe
 Debug/*
-Release/*
 ipch/*
 Platformer/Debug/*
 Platformer/Release/*
