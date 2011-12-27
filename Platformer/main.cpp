@@ -5,20 +5,25 @@
  * @author Mohammad El-Abid
  */
 
-// IDEA: Menu with mouse would be nice, but rest of game doesn't use mouse (though perhaps RPGs would).
+// THOUGHT: Menu with mouse would be nice, but rest of game doesn't use mouse (though perhaps RPGs would).
+// THOUGHT: in multiplayer, would the camera follow player 1 or find the midpoint of the everyone and prevent them from leaving camera?
+// RESPONSE: Just use 2 options on multiplayer cameras
 
 // following is a suggested order
 
-// TODO: screen scaling
+// TODO: how to make a scaling background?
+// TODO: GameStateHelper should not be singleton, be prepared to allow multiple windows (SDL 1.3)
+// TODO: check definitions for any uneeded variable copies
+// TODO: there is little consitency on spaces between argument parameters ( this ) or (that)
 // TODO: load map (meta data, tileset(s) data, tile data (collision), map data, events (scripting)
 // TODO: Player in map (physics, control, gamepad, multiplayer)
-// THOUGHT: in multiplayer, would the camera follow player 1 or find the midpoint of the everyone and prevent them from leaving camera?
 // TODO: create maps
 // TODO: Cutscene scripting
 // TODO: GUI overlays
 // TODO: AI Scripting
 // TODO: audio
 // TODO: better sprites
+// TODO: SDL 1.3, SDL 1.3 SDL_TTF, SDL 1.3 desktop width/height
 
 #include "Camera.h"
 #include "Credits.h"
@@ -32,6 +37,7 @@
 #include "SDL_ttf.h"
 #include "Timer.h"
 #include "Title.h"
+#include "Window.h"
 #include <string>
 
 GameStateHelper* state_helper = GameStateHelper::Instance();
@@ -71,45 +77,36 @@ void change_state()
 /**
  * @brief Initalizes the libraries and loads any common data
  *
- * @return The surface initalized by SDL
+ * @return 0 for all good, 1 for SDL eror, 2 for SDL_TTF error, 3 for any resource errors
  */
-SDL_Surface* init()
+int init()
 {
     // Tell SDL to load
     if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-        return NULL;
-
-    // Create the main screen
-    SDL_Surface* screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL, SDL_SWSURFACE );
-    if( screen == NULL )
-        return NULL;
+        return 1;
 
     // Tell SDL_ttf to load
     if( TTF_Init() == -1 )
-        return NULL;
+        return 2;
 
     // Open our font
     font = TTF_OpenFont( Helper::get_path_for_resource("Squada One.ttf").c_str(), 36 );
     if( font == NULL)
-        return NULL;
+        return 3;
 
-    // Set the window title
-    SDL_WM_SetCaption( SCREEN_TITLE, NULL );
-    return screen;
+    return 0;
 }
+
 
 /**
  * @brief Preforms all actions to close the application, free memory, save files, or other vital functions.
  *
  * @param screen The video surface we are drawing on
  */
-void clean_up(SDL_Surface* screen)
+void clean_up()
 {
     // Delete current state
     delete state_helper->currentState;
-
-    // Free surfaces
-    SDL_FreeSurface( screen );
 
     // Let SDL TTF unload
     TTF_CloseFont( font );
@@ -153,13 +150,23 @@ void setResourcePath( char executablePath[] )
  */
 int main( int argc, char* args[] )
 {
+    Timer fps_cap;
     setResourcePath(args[0]);
     
-    SDL_Surface* screen = init();
-    if( screen == NULL )
+    if( init() != 0 )
         return 1;
+    
+    // Before creating a screen, get the size of the default monitor
+    const SDL_VideoInfo* ptrVidInfo = SDL_GetVideoInfo();
+    int desktopHeight = ptrVidInfo->current_h;
+    int desktopWidth = ptrVidInfo->current_w;
 
-    Timer fps_cap;
+    Window window = Window( SCREEN_TITLE );
+    if( window.error() )
+        return 1;
+    // share our sizes
+    window.fullscreenHeight = desktopHeight;
+    window.fullscreenWidth = desktopWidth;
 
     // Set the current state ID
     state_helper->stateID = STATE_INTRO;
@@ -174,19 +181,19 @@ int main( int argc, char* args[] )
         fps_cap.start();
         
         // Do state event handling
-        state_helper->currentState->handle_events();
+        window.handle_events();
         
         // Do state logic
-        state_helper->currentState->logic();
+        window.logic();
         
         // Change state if needed
         change_state();
         
         // Do state rendering
-        state_helper->currentState->render(screen);
+        window.render();
         
         // Update the screen
-        if( SDL_Flip( screen ) == -1 )
+        if( SDL_Flip( window.get_screen() ) == -1 )
             return 1;
         
         // Prevent short frames
@@ -195,7 +202,7 @@ int main( int argc, char* args[] )
     }
 
     // Free our data, do anything important
-    clean_up( screen );
+    clean_up();
 
     return 0;
 }

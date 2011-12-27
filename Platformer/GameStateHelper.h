@@ -5,11 +5,13 @@
  * @author Mohammad El-Abid
  */
 
+#ifndef GAME_STATE_HELPER_H
+#define GAME_STATE_HELPER_H
+
 #include "GameState.h"
 #include "globals.h"
 
-#ifndef GAME_STATE_HELPER_H
-#define GAME_STATE_HELPER_H
+class GameState;
 
 class GameStateHelper
 {

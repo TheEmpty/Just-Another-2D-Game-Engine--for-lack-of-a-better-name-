@@ -29,43 +29,36 @@ Title::~Title()
     SDL_FreeSurface( background );
 }
 
-void Title::handle_events()
+void Title::handle_event(const Window* window, SDL_Event* anEvent)
 {
-    SDL_Event event;
-    while( SDL_PollEvent( &event ) )
+    if( anEvent->type == SDL_KEYDOWN )
     {
-        if( event.type == SDL_QUIT )
+        switch( anEvent->key.keysym.sym )
         {
-            state_helper->set_next_state( STATE_EXIT );
-        }
-        else if( event.type == SDL_KEYDOWN )
-        {
-            switch( event.key.keysym.sym )
-            {
-                case( SDLK_ESCAPE ):
-                    state_helper->set_next_state( STATE_EXIT );
-                    break;
-                case( SDLK_UP ):
-                case( SDLK_DOWN ):
-                    menu->reactToKey( event.key.keysym.sym );
-                    reaction.start();
-                    break;
-                case( SDLK_RETURN ):
-                    switch( menu->getPos() )
-                    {
-                        case( 2 ):
-                            state_helper->set_next_state( STATE_CREDITS );
-                            break;
-                        case( 3 ):
-                            state_helper->set_next_state( STATE_EXIT );
-                            break;
-                    }
-            }
+            case( SDLK_ESCAPE ):
+                state_helper->set_next_state( STATE_EXIT );
+                break;
+            case( SDLK_UP ):
+            case( SDLK_DOWN ):
+                menu->reactToKey( anEvent->key.keysym.sym );
+                reaction.start();
+                break;
+            case( SDLK_RETURN ):
+                switch( menu->getPos() )
+                {
+                    case( 2 ):
+                        state_helper->set_next_state( STATE_CREDITS );
+                        break;
+                    case( 3 ):
+                        state_helper->set_next_state( STATE_EXIT );
+                        break;
+                }
+                break;
         }
     }
 }
 
-void Title::logic()
+void Title::logic( const Window* window )
 {
     if( reaction.get_ticks() >= 400 )
     {
@@ -83,17 +76,25 @@ void Title::logic()
     }
 }
 
-void Title::render( SDL_Surface* screen )
+void Title::render( const Window* window )
 {
-    Helper::apply_surface( 0, 0, background, screen );
+    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
+
+    int x, y;
+    x = ( window->get_width() - background->w ) / 2;
+    y = ( window->get_height() - background->h ) / 2;
+    Helper::apply_surface( x, y, background, window->get_screen() );
+    
+    x = 0;
+    y += 60;
+    if( 0 > y) y = 0;
     
     int max = menu->getLength(); // more effecient then calling the method every loop
-    int x, y = 60;
     for( int i = 0; i < max; i++ )
     {
         SDL_Surface *item = menu->getMenuItem( i );
-        x = ( SCREEN_WIDTH - item->w ) / 2; // center it
-        Helper::apply_surface( x, y, item, screen );
+        x = ( window->get_width() - item->w ) / 2; // center it
+        Helper::apply_surface( x, y, item, window->get_screen() );
         y += item->h + padding;
     }
 }

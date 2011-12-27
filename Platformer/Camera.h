@@ -24,7 +24,7 @@ public:
      * @param width The width of the view.
      * @param height The height of the view.
      */
-    Camera(int x = 0, int y = 0, int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT);
+    Camera(int x = 0, int y = 0, int width = DEFAULT_SCREEN_WIDTH, int height = DEFAULT_SCREEN_HEIGHT);
 
     /**
      * @brief Mass update values of the internal SDL_Rect

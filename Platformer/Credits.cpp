@@ -36,51 +36,41 @@ Credits::~Credits()
     delete [] message;
 }
 
-void Credits::logic()
+void Credits::logic( const Window* window )
 {
 }
 
-void Credits::handle_events()
+void Credits::handle_event(const Window* window, SDL_Event* anEvent)
 {
-    SDL_Event event;
-    while( SDL_PollEvent( &event ) )
+    // was it a key?
+    if( anEvent->type == SDL_KEYDOWN )
     {
-        if( event.type == SDL_QUIT )
+        // was it escape or return?
+        if( anEvent->key.keysym.sym == SDLK_ESCAPE || anEvent->key.keysym.sym == SDLK_RETURN )
         {
-            state_helper->set_next_state( STATE_EXIT );
-        }
-        else if( event.type == SDL_KEYDOWN )
-        {
-            switch( event.key.keysym.sym )
-            {
-                case( SDLK_ESCAPE ):
-                    state_helper->set_next_state( STATE_EXIT );
-                    break;
-                case( SDLK_RETURN ):
-                    state_helper->set_next_state( prev_state );
-                    break;
-            }
+            // if so, return to previous state
+            state_helper->set_next_state( prev_state );
         }
     }
 }
 
-void Credits::render( SDL_Surface* screen )
+void Credits::render( const Window* window )
 {
-    SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 100, 99, 99 ) );
+    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
 
     int height = 0;
     for( int i = 0; i < messages; i++ )
         height += get_height(i) + padding; // height + padding
 
     // use this information to find the value to start at for Y to make them centerd horizontally
-    int x, y = ( SCREEN_HEIGHT - height ) / 2;
+    int x, y = ( window->get_height() - height ) / 2;
 
     for( int i = 0; i < messages; i++ )
     {
         if( message[i] != NULL )
         {
-            x = ( SCREEN_WIDTH - message[i]->w ) / 2; // center it
-            Helper::apply_surface( x, y, message[i], screen );
+            x = ( window->get_width() - message[i]->w ) / 2; // center it
+            Helper::apply_surface( x, y, message[i], window->get_screen() );
             y += message[i]->h + padding;
         }
         else

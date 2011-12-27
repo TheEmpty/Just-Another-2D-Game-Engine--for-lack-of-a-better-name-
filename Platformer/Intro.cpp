@@ -27,33 +27,24 @@ Intro::~Intro()
     SDL_FreeSurface( message );
 }
 
-void Intro::handle_events()
+void Intro::handle_event(const Window* window, SDL_Event* anEvent)
 {
-    SDL_Event event;
-    //While there's events to handle
-    while( SDL_PollEvent( &event ) )
+    // mouse click or key buttons = skip
+    if( ( anEvent->type == SDL_KEYDOWN ) || ( anEvent->type == SDL_MOUSEBUTTONDOWN ) )
     {
-        if( event.type == SDL_QUIT )
-        {
-            state_helper->set_next_state( STATE_EXIT );
-        }
-        // mouse click or key buttons = skip
-        else if( ( event.type == SDL_KEYDOWN ) || ( event.type == SDL_MOUSEBUTTONDOWN ) )
-        {
-            state_helper->set_next_state( STATE_TITLE );
-        }
+        state_helper->set_next_state( STATE_TITLE );
     }
 }
 
-void Intro::logic()
+void Intro::logic( const Window* window )
 {
     // 3sec max on intro
     if( wait.get_ticks() >= 3000 )
         state_helper->set_next_state( STATE_TITLE );
 }
 
-void Intro::render( SDL_Surface* screen )
+void Intro::render( const Window* window )
 {
-    Helper::apply_surface( 0, 0, background, screen );
-    Helper::apply_surface( 0, ( SCREEN_HEIGHT - message->h ), message, screen );
+    Helper::apply_surface( 0, 0, background, window->get_screen() );
+    Helper::apply_surface( 0, ( window->get_height() - message->h ), message, window->get_screen() );
 }

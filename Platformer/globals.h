@@ -12,8 +12,8 @@
 
 // Screen
 const char SCREEN_TITLE[] = "Just Another 2D Game Engine (for lack of a better name)";
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int DEFAULT_SCREEN_WIDTH = 640;
+const int DEFAULT_SCREEN_HEIGHT = 480;
 const int SCREEN_BITS_PER_PIXEL = 32;
 const int FRAMES_PER_SECOND = 60;
 

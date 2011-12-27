@@ -47,19 +47,19 @@ public:
     /**
      * @brief Handle "events" generally user input.
      */
-    void handle_events();
+    void handle_event(const Window* window, SDL_Event* anEvent);
 
     /**
      * @brief Handle any logic such as physics or autosave.
      */
-    void logic();
+    void logic( const Window* window );
 
     /**
      * @brief Renders graphics to the supplied surface.
      *
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
-    void render( SDL_Surface* screen );
+    void render( const Window* window );
 };
 
 #endif //TITLE_H

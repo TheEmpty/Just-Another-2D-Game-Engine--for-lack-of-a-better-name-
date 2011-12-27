@@ -92,6 +92,7 @@ void Helper::debug( int bufferSize, char* msg, ... )
     va_start( arg, msg );
     vsnprintf( buffer, bufferSize, msg, arg );
     va_end( arg );
+    strcat( buffer, "\n" );
 #ifdef _WIN32
     OutputDebugString(buffer);
 #endif

@@ -5,10 +5,12 @@
  * @author Mohammad El-Abid
  */
 
-#include "SDL.h"
-
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
+
+#include "SDL.h"
+#include "Window.h"
+class Window;
 
 class GameState
 {
@@ -18,19 +20,19 @@ public:
     /**
      * @brief Handle "events" generally user input.
      */
-    virtual void handle_events() = 0;
+    virtual void handle_event(const Window* window, SDL_Event* anEvent) = 0;
 
     /**
      * @brief Handle any logic such as physics or autosave.
      */
-    virtual void logic() = 0;
+    virtual void logic( const Window* window ) = 0;
 
     /**
      * @brief Renders graphics to the supplied surface.
      *
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
-    virtual void render( SDL_Surface* screen ) = 0;
+    virtual void render( const Window* window ) = 0;
 };
 
-#endif
+#endif // GAMESTATE_H
