@@ -9,21 +9,23 @@
 // THOUGHT: in multiplayer, would the camera follow player 1 or find the midpoint of the everyone and prevent them from leaving camera?
 // RESPONSE: Just use 2 options on multiplayer cameras
 
-// following is a suggested order
+// Engine
+    // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
+    // TODO: load map (meta data, tileset(s) data, tile data (collision), map data
+    // TODO: Player in map (physics, control, gamepad, multiplayer)
+    // TODO: create maps
+    // TODO: Event scripting
+    // TODO: Make intro a level where the character runs to the other side and it says "Press any key"
+    // TODO: Cutscene scripting
+    // TODO: AI Scripting
+    // TODO: audio
+    // TODO: Abstract classes and make it an engine not a game
+    // TODO: better sprites
+    // TODO: GameStateHelper should not be singleton, be prepared to allow multiple windows (SDL 1.3)
+    // TODO: SDL 1.3, SDL 1.3 SDL_TTF, SDL 1.3 desktop width/height
 
-// TODO: how to make a scaling background?
-// TODO: GameStateHelper should not be singleton, be prepared to allow multiple windows (SDL 1.3)
-// TODO: check definitions for any uneeded variable copies
-// TODO: there is little consitency on spaces between argument parameters ( this ) or (that)
-// TODO: load map (meta data, tileset(s) data, tile data (collision), map data, events (scripting)
-// TODO: Player in map (physics, control, gamepad, multiplayer)
-// TODO: create maps
-// TODO: Cutscene scripting
-// TODO: GUI overlays
-// TODO: AI Scripting
-// TODO: audio
-// TODO: better sprites
-// TODO: SDL 1.3, SDL 1.3 SDL_TTF, SDL 1.3 desktop width/height
+// Application 
+    // TODO: some way to set menu location when coming back from credits. Users won't expect it to change back to the top when they come back.
 
 #include "Camera.h"
 #include "Credits.h"
@@ -32,17 +34,19 @@
 #include "globals.h"
 #include "Helper.h"
 #include "Intro.h"
+#include "Map.h"
 #include "Menu.h"
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include "Timer.h"
 #include "Title.h"
 #include "Window.h"
+#include "PlayState.h"
 #include <string>
 
 GameStateHelper* state_helper = GameStateHelper::Instance();
 
-// Font stuff, TODO: find a better place for them
+// Font stuff
 TTF_Font *font = NULL;
 const int FONT_PADDING = 8;
 
@@ -62,10 +66,13 @@ void change_state()
         switch( state_helper->nextState )
         {
             case STATE_TITLE:
-                state_helper->currentState = new Title( font, FONT_PADDING );
+                state_helper->currentState = new Title( &font, FONT_PADDING );
                 break;
             case STATE_CREDITS:
-                state_helper->currentState = new Credits( state_helper->stateID, font, FONT_PADDING );
+                state_helper->currentState = new Credits( state_helper->stateID, &font, FONT_PADDING );
+                break;
+            case STATE_MAP:
+                state_helper->currentState = new PlayState( &font, state_helper->stateID, "maps/revisited.txt" );
                 break;
         }
 
@@ -90,8 +97,8 @@ int init()
         return 2;
 
     // Open our font
-    font = TTF_OpenFont( Helper::get_path_for_resource("Squada One.ttf").c_str(), 36 );
-    if( font == NULL)
+    font = TTF_OpenFont( Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), 36 );
+    if( font == NULL )
         return 3;
 
     return 0;
@@ -123,20 +130,23 @@ void setResourcePath( char executablePath[] )
 {
     // ../application folder/platformer
     // ..\application folder\platformer.exe
-    std::string path(executablePath);
+    std::string path( executablePath );
     // remove binary item
 #ifndef _WIN32
-    path = path.substr(0, path.find_last_of("/"));
+    // Apple, linux, etc.
+    path = path.substr( 0, path.find_last_of( "/" ) );
 #endif
 #ifdef _WIN32
-    path = path.substr(0, path.find_last_of("\\"));
+    path = path.substr( 0, path.find_last_of( "\\" ) );
 #endif
 
-#if _WIN32
+#ifndef __APPLE__
+    // Linux and Windows don't have resource folders
     Helper::resourcePath = path;
 #endif
 #if __APPLE__
-    path = path.substr(0, path.find_last_of("/")); // remove MacOS folder
+    // Only Apple
+    path = path.substr( 0, path.find_last_of( "/" ) ); // remove MacOS folder
     Helper::resourcePath = path + "/Resources"; // add resources folder
 #endif
 }
@@ -151,7 +161,7 @@ void setResourcePath( char executablePath[] )
 int main( int argc, char* args[] )
 {
     Timer fps_cap;
-    setResourcePath(args[0]);
+    setResourcePath( args[0] );
     
     if( init() != 0 )
         return 1;
@@ -161,27 +171,46 @@ int main( int argc, char* args[] )
     int desktopHeight = ptrVidInfo->current_h;
     int desktopWidth = ptrVidInfo->current_w;
 
+    // Create the main window
     Window window = Window( SCREEN_TITLE );
     if( window.error() )
         return 1;
+    
     // share our sizes
     window.fullscreenHeight = desktopHeight;
     window.fullscreenWidth = desktopWidth;
+    
+    // set minimum sizes
+    window.set_min_dim(MINIMUM_SCREEN_WIDTH, MINIMUM_SCREEN_HEIGHT);
 
     // Set the current state ID
     state_helper->stateID = STATE_INTRO;
 
     // Set the current game state object
-    state_helper->currentState = new Intro(font);
+    state_helper->currentState = new Intro(&font);
 
-    // While the user hasn't quit
-    while( state_helper->stateID != STATE_EXIT )
+    // While the user hasn't quit, TODO: and there is no window error
+    while( state_helper->stateID != STATE_EXIT && window.error() == false )
     {
         // Start the frame timer
         fps_cap.start();
         
         // Do state event handling
         window.handle_events();
+        
+        // Scale text, would probably do this in a parent gamestate. But will do in abstraction
+        if( window.screenChange )
+        {
+            int fontSize = ( window.get_width()/31 + window.get_height()/31 );
+            
+            TTF_Font* newFont = TTF_OpenFont( Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), fontSize );
+            if( newFont != NULL )
+            {
+                TTF_CloseFont( font );
+                font = newFont;
+            }
+        }
+        // E/O TEMP
         
         // Do state logic
         window.logic();
@@ -196,7 +225,7 @@ int main( int argc, char* args[] )
         if( SDL_Flip( window.get_screen() ) == -1 )
             return 1;
         
-        // Prevent short frames
+        // Prevent short frames by waiting the excess time
         if( fps_cap.get_ticks() < 1000 / FRAMES_PER_SECOND )
             SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps_cap.get_ticks() );
     }

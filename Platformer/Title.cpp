@@ -7,13 +7,13 @@
 
 #include "Title.h"
 
-Title::Title( TTF_Font* newFont, int newPadding )
+Title::Title( TTF_Font** newFont, int newPadding )
 {
     state_helper = GameStateHelper::Instance();
     font = newFont;
     padding = newPadding;
     
-    background = Helper::load_image( Helper::get_path_for_resource("images/title.bmp") );
+    background = Helper::load_image( Helper::get_path_for_resource( "images/title.bmp" ) );
     
     // Menu
     menu = new Menu( font, defaultFontColor, activeFontColor, 4 );
@@ -46,6 +46,9 @@ void Title::handle_event(const Window* window, SDL_Event* anEvent)
             case( SDLK_RETURN ):
                 switch( menu->getPos() )
                 {
+                    case( 0 ):
+                        state_helper->set_next_state( STATE_MAP );
+                        break;
                     case( 2 ):
                         state_helper->set_next_state( STATE_CREDITS );
                         break;
@@ -60,6 +63,9 @@ void Title::handle_event(const Window* window, SDL_Event* anEvent)
 
 void Title::logic( const Window* window )
 {
+    if( window->screenChange )
+        menu->redraw();
+    
     if( reaction.get_ticks() >= 400 )
     {
         Uint8 *keystates = SDL_GetKeyState( NULL );
@@ -87,7 +93,7 @@ void Title::render( const Window* window )
     
     x = 0;
     y += 60;
-    if( 0 > y) y = 0;
+    if( 0 > y ) y = 0;
     
     int max = menu->getLength(); // more effecient then calling the method every loop
     for( int i = 0; i < max; i++ )

@@ -25,7 +25,7 @@ private:
     // Menu.
     Menu *menu;
     // Font to use on menu.
-    TTF_Font* font;
+    TTF_Font** font;
     // State managment
     GameStateHelper *state_helper;
     // Used to tell how long since last reaction to held key.
@@ -38,7 +38,7 @@ public:
      * @param newFont The font to use while rendering.
      * @param newPadding the distance between the lines of text (in addition to the height of the text).
      */
-    Title(TTF_Font* newFont, int newPadding);
+    Title(TTF_Font** newFont, int newPadding);
     /**
      * @brief free any objects that are not automatically freed by scope.
      */

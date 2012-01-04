@@ -21,7 +21,7 @@ private:
     // Version text surface
     SDL_Surface* message;
     // Font that will be used
-    TTF_Font* font;
+    TTF_Font** font;
     // State managment
     GameStateHelper* state_helper;
     // If the user doesn't click or press any button, we'll forward them based on the ticks since state started.
@@ -33,7 +33,7 @@ public:
      *
      * @param newFont Font to use when rendering text
      */
-    Intro(TTF_Font* newFont);
+    Intro( TTF_Font** newFont );
 
     /**
      * @brief Frees the SDL_Surfaces used and any other responsabilites need to be performed for a clean deletion.

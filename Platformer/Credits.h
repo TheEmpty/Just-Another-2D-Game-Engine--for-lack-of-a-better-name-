@@ -26,13 +26,15 @@ private:
 
     // A pointer to an array of SDL_Surface pointers. Allowing us to dynamically create an SDL_Surface array without memory errors.
     SDL_Surface** message;
-    // A pointer to the font to be used for all the text
-    TTF_Font* font;
+    // A pointer to the pointer to the font to be used for all the text
+    TTF_Font** font;
     // State manager
     GameStateHelper *state_helper;
 
     // Recursive function for getting the height of a row, or the first non NULL row if row is NULL (blank line)
-    int get_height(int index);
+    int get_height( int index );
+    
+    void create_messages();
 
 public:
     /**
@@ -42,7 +44,7 @@ public:
      * @param newFont Font to use when rendering text
      * @param newPadding Amount of padding to use between lines
      */
-    Credits(int prev, TTF_Font* newFont, int newPadding);
+    Credits( int prev, TTF_Font** newFont, int newPadding );
     /**
      * @brief A deconstructor to free the SDL_Surface array (message)
      */
@@ -51,7 +53,7 @@ public:
     /**
      * @brief Handle "events" generally user input.
      */
-    void handle_event(const Window* window, SDL_Event* anEvent);
+    void handle_event( const Window* window, SDL_Event* anEvent );
 
     /**
      * @brief Handle any logic such as physics or autosave.

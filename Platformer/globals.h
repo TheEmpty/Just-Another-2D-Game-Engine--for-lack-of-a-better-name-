@@ -12,12 +12,17 @@
 
 // Screen
 const char SCREEN_TITLE[] = "Just Another 2D Game Engine (for lack of a better name)";
-const int DEFAULT_SCREEN_WIDTH = 640;
-const int DEFAULT_SCREEN_HEIGHT = 480;
+const int DEFAULT_SCREEN_WIDTH = 940;
+const int DEFAULT_SCREEN_HEIGHT = 470;
 const int SCREEN_BITS_PER_PIXEL = 32;
 const int FRAMES_PER_SECOND = 60;
+const int MINIMUM_SCREEN_WIDTH = 640;
+const int MINIMUM_SCREEN_HEIGHT = 480;
+const int SDLK_LCOMMAND = 1024;
+const int SDLK_RCOMMAND = 2048;
 
 // Font
+// TODO: why aren't these in CAPS!
 const SDL_Color defaultFontColor = {0, 0, 0};
 const SDL_Color activeFontColor  = {0, 122, 153};
 

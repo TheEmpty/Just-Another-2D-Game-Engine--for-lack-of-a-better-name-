@@ -7,14 +7,14 @@
 
 #include "Intro.h"
 
-Intro::Intro( TTF_Font* newFont ) // take font
+Intro::Intro( TTF_Font** newFont ) // take font
 {
     state_helper = GameStateHelper::Instance();
     font = newFont;
 
     //Load the background
     background = Helper::load_image( Helper::get_path_for_resource("images/intro.bmp").c_str() );
-    message = TTF_RenderText_Solid( font, "Version 0.0.5", defaultFontColor );
+    message = TTF_RenderText_Solid( *font, "Version 0.0.5", defaultFontColor );
 
     //Monitor how long they have looked at the version
     wait.start();

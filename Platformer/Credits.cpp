@@ -7,25 +7,30 @@
 
 #include "Credits.h"
 
-Credits::Credits( int prev, TTF_Font* newFont, int newPadding )
+Credits::Credits( int prev, TTF_Font** newFont, int newPadding )
 {
     state_helper = GameStateHelper::Instance();
     prev_state = prev;
     font = newFont;
     padding = newPadding;
-    
+    create_messages();
+}
+
+void Credits::create_messages()
+{
     messages = 7;
     message = new SDL_Surface* [messages];
+    // initalize
     for( int i = 0; i < messages; i++ )
         message[i] = SDL_CreateRGBSurface(0,0,0,0,0,0,0,0);
     
-    message[0] = TTF_RenderText_Solid( font, "Credits", defaultFontColor );
-    message[1] = TTF_RenderText_Solid( font, "Mohammad El-Abid - Developer", defaultFontColor );
-    message[2] = TTF_RenderText_Solid( font, "Lazy Foo for his tutorials", defaultFontColor );
-    message[3] = TTF_RenderText_Solid( font, "Joe Prince for the 'Squada One' font", defaultFontColor );
+    message[0] = TTF_RenderText_Solid( *font, "Credits", defaultFontColor );
+    message[1] = TTF_RenderText_Solid( *font, "Mohammad El-Abid - Developer", defaultFontColor );
+    message[2] = TTF_RenderText_Solid( *font, "Lazy Foo for his tutorials", defaultFontColor );
+    message[3] = TTF_RenderText_Solid( *font, "Joe Prince for the 'Squada One' font", defaultFontColor );
     message[4] = NULL; // blank line, takes height of previous message
     message[5] = NULL; // blank line, takes height of previous message
-    message[6] = TTF_RenderText_Solid( font, "Back", activeFontColor );
+    message[6] = TTF_RenderText_Solid( *font, "Back", activeFontColor );
 }
 
 Credits::~Credits()
@@ -38,6 +43,10 @@ Credits::~Credits()
 
 void Credits::logic( const Window* window )
 {
+    if( window->screenChange )
+    {
+        create_messages();
+    }
 }
 
 void Credits::handle_event(const Window* window, SDL_Event* anEvent)
@@ -56,6 +65,7 @@ void Credits::handle_event(const Window* window, SDL_Event* anEvent)
 
 void Credits::render( const Window* window )
 {
+    
     SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
 
     int height = 0;

@@ -7,7 +7,7 @@
 
 #include "Menu.h"
 
-Menu::Menu( TTF_Font *setFont, SDL_Color defaultC, SDL_Color selectedC, int size )
+Menu::Menu( TTF_Font **setFont, SDL_Color defaultC, SDL_Color selectedC, int size )
 {
     font = setFont;
     defaultColor = defaultC;
@@ -38,6 +38,12 @@ void Menu::setText( int index, std::string text )
     }
 }
 
+void Menu::redraw()
+{
+    for( int i = 0; i < menuLength; i++ )
+        renderText( i );
+}
+
 void Menu::renderText( int index )
 {
     SDL_FreeSurface( menuItems[index] );
@@ -48,7 +54,7 @@ void Menu::renderText( int index )
     else
         fg = &selectedColor;
 
-    menuItems[index] = TTF_RenderText_Solid( font, menuText[index].c_str(), *fg );
+    menuItems[index] = TTF_RenderText_Solid( *font, menuText[index].c_str(), *fg );
 }
 
 void Menu::reactToKey( SDLKey key )

@@ -17,7 +17,7 @@ class Menu
 {
 private:
     // Font used to render the menu text
-    TTF_Font *font;
+    TTF_Font **font;
     // Default color of the text
     SDL_Color defaultColor;
     // Color used when "selected" or "hovering"
@@ -48,12 +48,17 @@ public:
      * @param selectedC Color of text for selected menu items.
      * @param length The number of entries in the menu. "Play", "Settings", "Credit" would be 3.
      */
-    Menu( TTF_Font *font, SDL_Color defaultC, SDL_Color selectedC, int length );
+    Menu( TTF_Font **font, SDL_Color defaultC, SDL_Color selectedC, int length );
 
     /**
      * @brief Unloads dynamic arrays.
      */
     ~Menu();
+    
+    /**
+     * @brief Redraws all items
+     */
+    void redraw();
 
     /**
      * @brief Sets the text for a menu item.

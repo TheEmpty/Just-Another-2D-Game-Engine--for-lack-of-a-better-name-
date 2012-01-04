@@ -24,7 +24,7 @@ public:
      * @param width The width of the view.
      * @param height The height of the view.
      */
-    Camera(int x = 0, int y = 0, int width = DEFAULT_SCREEN_WIDTH, int height = DEFAULT_SCREEN_HEIGHT);
+    Camera( int x = 0, int y = 0, int width = DEFAULT_SCREEN_WIDTH, int height = DEFAULT_SCREEN_HEIGHT );
 
     /**
      * @brief Mass update values of the internal SDL_Rect
@@ -34,21 +34,21 @@ public:
      * @param w The width of the view
      * @param h The height of the view
      */
-    void update(int x, int y, int w, int h);
+    void update( int x, int y, int w, int h );
 
     /**
      * @brief Copies the cordnates of an SDL_Rect for the camera's x, y and viewing w, h.
      *
      * @param box The SDL_Rect to clone.
      */
-    void set_view(SDL_Rect box);
+    void set_view( SDL_Rect box );
 
     /**
      * @brief Calculates the x and y values to place the passed SDL_Rect in the center of the viewport.
      *
      * @param box The SDL_Rect to center on.
      */
-    void center_view(SDL_Rect box);
+    void center_view( SDL_Rect box );
 };
 
 #endif

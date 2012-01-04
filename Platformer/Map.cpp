@@ -1,229 +1,154 @@
-// KEPT AS REFRENCE
-
-
-/*
- 
 #include "Map.h"
+#include "Helper.h"
+#include <fstream>
 
-Map::Map( std::string filename )
+void Map::load_map( const char filename[] )
 {
-    //defaults
-    name    = "N/A";
-    creator = "N/A";
+    std::ifstream mapFile;
+    mapFile.open( Helper::get_path_for_resource( std::string( filename ) ).c_str() );
+    line_number = 0;
 
-    //tile offsets
-    int x = 0, y = 0, tiles_index = 0;
-
-    //open map
-    std::ifstream map_file = std::ifstream( filename.c_str() );
-
-    //If the map file could not be loaded
-    if( map_file == NULL )
+    if (mapFile.is_open())
     {
-//        tiles = NULL;
-        loaded = false;
+        std::string line;
+        current_directive = NULL;
+
+        while ( error.empty() && mapFile.good() )
+        {
+            getline( mapFile, line );
+            line_number++;
+            change_directive( &line );
+            if( error.empty() )
+                parse_from_line( &line );
+        }
+
+        mapFile.close();
+        Helper::debug(150, "Loaded: %s", info[ "name" ].c_str() );
     }
     else
     {
-        std::string operation = "";
-        std::string line;
-        
-        loaded = true; // set to false if we encounter any errors
-
-        while( map_file.good() )
-        {
-            // get the next line to be parsed
-            std::getline( map_file, line );
-            
-            // if it's a blank line or lacks a colon unless graphics, skip this iteration
-            if( line.find_first_not_of( " \n\r\t" ) == -1 || ( line.find_first_of( ":" ) == -1 && operation != "graphics" ) )
-                continue;
-
-            // confirm key: value lines
-            if( line[0] == ' ' && ( operation == "tileset" || operation == "information" || operation == "tiles" ) )
-            {
-                // no key name
-                if( line[ line.find_first_not_of(' ') ] == ':' )
-                {
-                    loaded = false;
-                    break;
-                }
-
-                // no value
-                unsigned int offset = line.find_first_of(':') + 1;
-                // there is nothing after the colon
-                if( offset > line.length() )
-                {
-                    loaded = false;
-                    break;
-                }
-
-                // only white space after colon
-                if( line.find_first_not_of( " \n\r\t", offset ) == -1 )
-                {
-                    loaded = false;
-                    break;
-                }
-            }
-
-            // is the first character not a space? (new operation)
-            if( line[0] != ' ' )
-            {
-                // then just change the operation and move on
-                line.erase(line.find_last_of(":"));
-                operation = Helper::lower_case(line); // lowercase, remove white space and colon
-            }
-            // set the tiles up!
-            else if( operation == "graphics" )
-            {
-                // strip line
-                int off = line.find_first_not_of( " " );
-                line = line.substr(off, line.find_last_not_of( " " ) - off + 1);
-                
-                // while there are still tiles to be proccessed
-                while( line.find_first_of("0123456789") != -1 )
-                {
-                    // find where to move "start" of line
-                    int new_start = line.find_first_of( " " );
-                    if( new_start == -1 )
-                        new_start = line.length() - 1;
-
-                    // parse number
-                    int clip_number = atoi(line.substr(0, new_start).c_str());
-                    // remove number from line
-                    off = new_start + 1;
-                    line = line.substr( off, line.length() - off );
-
-                    // create tile
-//					tiles[ tiles_index++ ] = * new Tile( x, y, tile_width, tile_height, clip_number );
-                    x += tile_width;
-                }
-                y += tile_height;
-                x = 0;
-            }
-            // these two are essentially maps
-            else if( operation == "information" || operation == "tileset" )
-            {
-                // get the key by striping away the white spaces on the left and stoping at the colon
-                std::string key = line.substr( line.find_first_not_of( " " ), line.find_last_of( ":" ) - 1);
-                key = Helper::lower_case(key);
-
-                // get the value
-                int off = line.find_last_of( ":" ) + 1;
-                std::string value = line.substr( off, line.length() - off );
-                // strip lefthand whitespace
-                off = value.find_first_not_of( " " );
-                if( off != 0 )
-                    value = value.substr( off, value.length() - off );
-                // stright righthand side
-                value = value.substr(0, value.find_last_not_of( " \n\r\t" ) + 1);
-
-                if( operation == "information" )
-                {
-                    if( key == "name" )
-                    {
-                        name = value;
-                    }
-                    else if( key == "creator" )
-                    {
-                        creator = value;
-                    }
-                }
-                else if( operation == "tileset" )
-                {
-                    if( key == "file" )
-                    {
-                        tileset = Helper::load_image(value);
-                    }
-                    else if( key == "width" )
-                    {
-                        tile_width = atoi(value.c_str());
-                    }
-                    else if( key == "height" )
-                    {
-                        tile_height = atoi(value.c_str());
-                    }
-                    else if( key == "tiles" )
-                    {
-                        total_tiles = atoi(value.c_str());
-//						tiles = new Tile[total_tiles];
-                    }
-                    else if( key == "sprites" )
-                    {
-                        total_sprites = atoi(value.c_str());
-                    }
-                }
-            }
-        }
-        if( tileset == NULL || tile_width == NULL || tile_height == NULL || total_tiles == NULL || total_sprites == NULL ){
-            loaded = false;
-        }
-        make_clips();
+        set_error( "Unable to load file." ); // Line 0
     }
 }
 
-void Map::make_clips()
+void Map::change_directive( std::string* line )
 {
-    clips = new SDL_Rect[ total_sprites ];
-
-    int x = 0, y = 0;
-    for( int i = 0; i < total_sprites; i++ )
+    if( line->empty() == false && line->find_first_of( " \n\r\t" ) != 0 )
     {
-        clips[i].x = x;
-        clips[i].y = y;
-        clips[i].w = tile_width;
-        clips[i].h = tile_height;
+        // copy the line so we can start striping it
+        std::string stripped = *line;
 
-        y += tile_height;
-        if(y >= tileset->h)
+        int index = stripped.find_first_not_of( " \n\r\t" );
+        if( index != 0 )
+            stripped = stripped.substr( index, stripped.length() - index );
+
+        index = stripped.find_last_of( ":" );
+        if( index == -1 )
         {
-            y = 0;
-            x += tile_width;
+            set_error( "Directive is missing a colon." );
+            return;
+        } else {
+            stripped = stripped.substr( 0, index );
+        }
+
+        // ensure, Information -> Tileset -> Tiles -> Map -> Events -> Cutscenes
+        stripped = Helper::lower_case( stripped );
+        if( stripped == "information" )
+        {
+            current_directive = "information";
+        }
+        // how come strncmp on current_directive, but not on stripped? Shouldn't string use compare?
+        else if( strncmp( current_directive, "information", 11 ) == 0 && stripped == "tileset" )
+        {
+            current_directive = "tileset";
+        }
+        else if( strncmp( current_directive, "tileset", 7 ) == 0 && stripped == "tiles" )
+        {
+            current_directive = "tiles";
+        }
+        else if( strncmp( current_directive, "tiles", 5 ) == 0 && stripped == "map" )
+        {
+            current_directive = "map";
+        }
+        // events, cutscenes
+
+        Helper::debug( 300, "'%s' is a directive. Current directive is '%s'", stripped.c_str(), current_directive );
+    }
+}
+
+void Map::parse_from_line( std::string* line )
+{
+    Helper::debug( 600, "Parsing: %s", line->c_str() );
+    // It's not the directive change or blank line
+    if( line->find_first_not_of( " \n\r\t" ) != -1 )
+    {
+        if( strncmp( current_directive, "information", 11 ) == 0 )
+        {
+            std::string* keyv = get_key_val( line );
+            if( keyv[0].empty() == false && keyv[1].empty() == false )
+            {
+                info[ keyv[0] ] = keyv[1];
+            }
+        }
+        else if( strncmp( current_directive, "tileset", 7 ) == 0 )
+        {
+            get_key_val( line );
+        }
+        else if( strncmp( current_directive, "tiles", 5 ) == 0 )
+        {
+            get_key_val( line );
         }
     }
+    Helper::debug(150, "NAME: %s", info["name"].c_str());
 }
 
-bool Map::is_loaded()
+std::string* Map::get_key_val( std::string* line )
 {
-    return loaded;
-}
-
-
-std::string Map::get_name()
-{
-    return name;
-}
-
-std::string Map::get_creator()
-{
-    return creator;
-}
-
-SDL_Surface* Map::get_tileset()
-{
-    return tileset;
-}
-
-void Map::show( SDL_Surface* screen, Camera* cam )
-{
-    for( int i = 0; i < total_tiles; i++ )
+    std::string key_val[2];
+    int start, end;
+    
+    start = line->find_first_not_of( " " );
+    end = line->find_last_of( ":" );
+    if( start == -1 )
     {
-//		tiles[ i ].show(tileset, screen, cam, &clips[ tiles[ i ].get_tile_number() ]);
+        set_error( "Invalid start of key." );
     }
+    else if( end == -1 )
+    {
+        set_error( "Invalid key, value format" );
+    }
+    else
+    {
+        key_val[0] = line->substr( start, end - start );
+    }
+    
+    start = line->find_first_not_of(" ", end + 1);
+    end = line->find_last_of( " \n\r" );
+    if( start == -1 )
+    {
+        set_error( "Invalid start of value." );
+    }
+    else if( end == -1 )
+    {
+        set_error( "Unable to parse value" );
+    }
+    else
+    {
+        key_val[1] = line->substr( start, end - start );
+    }
+    
+    Helper::debug(250, "%s: %s", key_val[0].c_str(), key_val[1].c_str());
+
+    return key_val;
 }
-// void show(SDL_Surface *tiles, SDL_Surface *screen, Camera *cam, SDL_Rect *clip[]);
 
-int Map::get_tile_height()
+void Map::set_error( const char text[] )
 {
-    return tile_height;
+    char buffer[100];
+    sprintf( buffer, "Line: %i, Error: ", line_number );
+    std::string builder = buffer;
+    builder.append( text );
+    error = builder.c_str();
 }
 
-/*void Map::get_tiles(Tile **pointer)
-{
-    *pointer = tiles;
-}*/ /*
-
-int Map::get_total_tiles()
-{
-    return total_tiles;
-} */
+// Vector <key, value> of "name: bob"

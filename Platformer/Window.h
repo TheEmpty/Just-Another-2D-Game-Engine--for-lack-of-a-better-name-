@@ -18,17 +18,21 @@ private:
     GameStateHelper* state_helper;
     bool isFullscreen;
     bool errors;
+    bool updateScreen;
 
     int windowedWidth;
     int windowedHeight;
+    int minimumWindowedWidth;
+    int minimumWindowedHeight;
     int bpp;
 
     SDL_Surface* screen;
 public:
-    Window(const char title[], int newWidth = DEFAULT_SCREEN_WIDTH, int newHeight = DEFAULT_SCREEN_HEIGHT, int screen_bpp = SCREEN_BITS_PER_PIXEL);
+    Window(const char title[], int newWidth = DEFAULT_SCREEN_WIDTH, int newHeight = DEFAULT_SCREEN_HEIGHT, int screen_bpp = SCREEN_BITS_PER_PIXEL, bool fullScreen = false);
     
     int fullscreenWidth;
     int fullscreenHeight;
+    bool screenChange;
 
     bool error();
     bool fullscreen();
@@ -40,12 +44,22 @@ public:
     int get_width() const { return isFullscreen ? fullscreenWidth : windowedWidth; }
     int get_height() const { return isFullscreen ? fullscreenHeight : windowedHeight; }
     int get_bpp() const { return bpp; }
+    bool get_screen_changed() const { return screenChange; }
+    
+    void set_width( int newWidth );
+    void set_height( int newHeight );
+    void set_dim( int width, int height );
+    
+    void set_min_width( int newWidth );
+    void set_min_height( int newHeight );
+    void set_min_dim( int width, int height );
 
     void logic();
     void render();
     void handle_events();
     void resize( SDL_Event* anEvent );
     void fullscreen( SDL_Event* anEvent );
+    void close( SDL_Event* anEvent );
 };
 
 #endif // WINDOW_H

@@ -29,12 +29,12 @@ private:
     /**
      * @brief Prevent copy-construction.
      */
-    GameStateHelper(const GameStateHelper&);
+    GameStateHelper( const GameStateHelper& );
 
     /**
      * @brief Prevent assignment/overwrite.
      */
-    GameStateHelper& operator=(const GameStateHelper&);
+    GameStateHelper& operator=( const GameStateHelper& );
 
 public:
     /**

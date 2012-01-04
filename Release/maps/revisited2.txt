@@ -1,0 +1,31 @@
+Information:
+ name:    Revisited
+ creator: Mohammad El-Abid
+ email:   mohammad@el-abid.com
+ info: Something I would like to try and do later on, allow multiple tilesets
+
+Tilesets:
+ 01:
+  file: ../images/sheet0.bmp
+  width: 192
+  height: 64
+  tile_width: 64
+  tile_height: 64
+ 02:
+  file: ../images/sheet1.bmp
+  width: 192
+  height: 64
+  tile_width: 64
+  tile_height: 64
+
+Tiles:
+ 00: NULL
+ 01: rect(0,0,64,64)
+ 02: rect(0,0,64,64)
+
+Map:
+ 01x02 01x02 01x02 01x02 01x02 01x02 01x02 01x02 01x02
+ 02x01 02x01 02x01 01x02 02x00 01x00 02x01 01x01 02x01
+
+Events:
+  

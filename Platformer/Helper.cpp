@@ -32,9 +32,9 @@ std::string Helper::get_path_for_resource( std::string item )
 {
 #ifdef __APPLE__
     // XCode removes all of our folders and puts all files into one resource folder
-    int last_index = item.find_last_of("/");
-    if(last_index != -1)
-        item = item.substr( last_index, item.length() - last_index); // take only the file name
+    int last_index = item.find_last_of( "/" );
+    if( last_index != -1 )
+        item = item.substr( last_index, item.length() - last_index ); // take only the file name
 #endif
     return resourcePath + "/" + item;
 }
@@ -92,11 +92,11 @@ void Helper::debug( int bufferSize, char* msg, ... )
     va_start( arg, msg );
     vsnprintf( buffer, bufferSize, msg, arg );
     va_end( arg );
-    strcat( buffer, "\n" );
 #ifdef _WIN32
-    OutputDebugString(buffer);
+    strcat( buffer, "\n" );
+    OutputDebugString( buffer );
 #endif
 #ifdef __APPLE__
-    printf(buffer);
+    printf( "%s\n", buffer );
 #endif
 }
