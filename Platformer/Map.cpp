@@ -79,16 +79,19 @@ bool Map::change_directive( std::string* line )
 
 void Map::parse_from_line( std::string* line )
 {
-    if( strncmp( current_directive, "information", 11 ) == 0 )
+    if( line->empty() == false && line->find_first_not_of( " \n\r\t" ) != -1)
     {
-        std::string* keyv = get_key_val( line );
-        if( keyv[0].empty() == false && keyv[1].empty() == false ) info[ keyv[0] ] = keyv[1];
+        if( strncmp( current_directive, "information", 11 ) == 0 )
+        {
+            std::string key, value;
+            get_key_val( line, &key, &value );
+            if( key.empty() == false && value.empty() == false ) info[ key ] = value;
+        }
     }
 }
 
-std::string* Map::get_key_val( std::string* line )
+void Map::get_key_val( std::string* line, std::string* key, std::string* value )
 {
-    std::string key_val[2];
     int start, end;
     
     start = line->find_first_not_of( " " );
@@ -103,7 +106,8 @@ std::string* Map::get_key_val( std::string* line )
     }
     else
     {
-        key_val[0] = line->substr( start, end - start );
+        key->clear();
+        key->append( line->substr( start, end - start ) );
     }
     
     start = line->find_first_not_of(" ", end + 1);
@@ -118,12 +122,9 @@ std::string* Map::get_key_val( std::string* line )
     }
     else
     {
-        key_val[1] = line->substr( start, end - start );
+        value->clear();
+        value->append( line->substr( start, end - start ) );
     }
-    
-    Helper::debug(250, "%s: %s", key_val[0].c_str(), key_val[1].c_str());
-
-    return key_val;
 }
 
 void Map::set_error( const char text[] )

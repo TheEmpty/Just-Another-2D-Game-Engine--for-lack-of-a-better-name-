@@ -17,7 +17,7 @@ private:
     void set_error( const char text[] );
     bool change_directive( std::string* line );
     void parse_from_line( std::string* line );
-    std::string* get_key_val( std::string* line );
+    void get_key_val( std::string* line, std::string* key, std::string* value );
 public:
     const std::string* get_error() { return &error; }
     void load_map( const char[] );

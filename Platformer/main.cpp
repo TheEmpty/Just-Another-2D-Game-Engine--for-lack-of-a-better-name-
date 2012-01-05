@@ -11,6 +11,8 @@
 
 // Engine
     // ASAP: load and display tiles from a map
+    // TODO: menu in PlayState
+    // TODO: select map before entering PlayState
     // TODO: bring documentation back upto date
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
     // TODO: load map (meta data, tileset(s) data, tile data (collision), map data
@@ -201,7 +203,7 @@ int main( int argc, char* args[] )
     // Set the current game state object
     state_helper->currentState = new Intro(&font);
 
-    // While the user hasn't quit, TODO: and there is no window error
+    // While the user hasn't quit
     while( state_helper->stateID != STATE_EXIT && window.error() == false )
     {
         // Start the frame timer

@@ -16,11 +16,7 @@ PlayState::PlayState( TTF_Font** newFont, int prev, char filename[] )
     previous_state = prev;
     state_helper = GameStateHelper::Instance();
     map.load_map( filename );
-    if( map.get_error()->empty() == false )
-    {
-        tile_layer = NULL;
-    }
-    Helper::debug(200, "map.get_error(): %s", map.get_error()->c_str());
+    if( map.get_error()->empty() == false ) tile_layer = NULL;
 }
 
 PlayState::~PlayState()
