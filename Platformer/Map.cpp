@@ -17,9 +17,7 @@ void Map::load_map( const char filename[] )
         {
             getline( mapFile, line );
             line_number++;
-            change_directive( &line );
-            if( error.empty() )
-                parse_from_line( &line );
+            if( error.empty() && change_directive( &line ) == false ) parse_from_line( &line );
         }
 
         mapFile.close();
@@ -31,7 +29,7 @@ void Map::load_map( const char filename[] )
     }
 }
 
-void Map::change_directive( std::string* line )
+bool Map::change_directive( std::string* line )
 {
     if( line->empty() == false && line->find_first_of( " \n\r\t" ) != 0 )
     {
@@ -46,7 +44,7 @@ void Map::change_directive( std::string* line )
         if( index == -1 )
         {
             set_error( "Directive is missing a colon." );
-            return;
+            return false;
         } else {
             stripped = stripped.substr( 0, index );
         }
@@ -56,50 +54,36 @@ void Map::change_directive( std::string* line )
         if( stripped == "information" )
         {
             current_directive = "information";
+            return true;
         }
         // how come strncmp on current_directive, but not on stripped? Shouldn't string use compare?
         else if( strncmp( current_directive, "information", 11 ) == 0 && stripped == "tileset" )
         {
             current_directive = "tileset";
+            return true;
         }
         else if( strncmp( current_directive, "tileset", 7 ) == 0 && stripped == "tiles" )
         {
             current_directive = "tiles";
+            return true;
         }
         else if( strncmp( current_directive, "tiles", 5 ) == 0 && stripped == "map" )
         {
             current_directive = "map";
+            return true;
         }
         // events, cutscenes
-
-        Helper::debug( 300, "'%s' is a directive. Current directive is '%s'", stripped.c_str(), current_directive );
+        return false;
     }
 }
 
 void Map::parse_from_line( std::string* line )
 {
-    Helper::debug( 600, "Parsing: %s", line->c_str() );
-    // It's not the directive change or blank line
-    if( line->find_first_not_of( " \n\r\t" ) != -1 )
+    if( strncmp( current_directive, "information", 11 ) == 0 )
     {
-        if( strncmp( current_directive, "information", 11 ) == 0 )
-        {
-            std::string* keyv = get_key_val( line );
-            if( keyv[0].empty() == false && keyv[1].empty() == false )
-            {
-                info[ keyv[0] ] = keyv[1];
-            }
-        }
-        else if( strncmp( current_directive, "tileset", 7 ) == 0 )
-        {
-            get_key_val( line );
-        }
-        else if( strncmp( current_directive, "tiles", 5 ) == 0 )
-        {
-            get_key_val( line );
-        }
+        std::string* keyv = get_key_val( line );
+        if( keyv[0].empty() == false && keyv[1].empty() == false ) info[ keyv[0] ] = keyv[1];
     }
-    Helper::debug(150, "NAME: %s", info["name"].c_str());
 }
 
 std::string* Map::get_key_val( std::string* line )

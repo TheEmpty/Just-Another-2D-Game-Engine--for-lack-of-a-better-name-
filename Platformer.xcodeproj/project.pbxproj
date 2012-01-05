@@ -14,6 +14,7 @@
 		1105C2A014A9078800E8DB30 /* title.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 1105C29C14A9078800E8DB30 /* title.bmp */; };
 		111E7AFF14AA325F00FE1C40 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 111E7AFE14AA325F00FE1C40 /* Window.cpp */; };
 		111E7B0314AA34AA00FE1C40 /* revisited.txt in Resources */ = {isa = PBXBuildFile; fileRef = 111E7B0214AA34AA00FE1C40 /* revisited.txt */; };
+		11352C7114B60A4900B44A1F /* icon-mac.icns in Resources */ = {isa = PBXBuildFile; fileRef = 11352C7014B60A4900B44A1F /* icon-mac.icns */; };
 		11C16C8714A81BA100653A8A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7114A81BA100653A8A /* Camera.cpp */; };
 		11C16C8814A81BA100653A8A /* Credits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7314A81BA100653A8A /* Credits.cpp */; };
 		11C16C8914A81BA100653A8A /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7814A81BA100653A8A /* Helper.cpp */; };
@@ -59,6 +60,7 @@
 		111E7AFE14AA325F00FE1C40 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Window.cpp; path = Platformer/Window.cpp; sourceTree = "<group>"; };
 		111E7B0114AA326900FE1C40 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window.h; path = Platformer/Window.h; sourceTree = "<group>"; };
 		111E7B0214AA34AA00FE1C40 /* revisited.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = revisited.txt; path = Release/maps/revisited.txt; sourceTree = "<group>"; };
+		11352C7014B60A4900B44A1F /* icon-mac.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "icon-mac.icns"; sourceTree = "<group>"; };
 		11C16C7114A81BA100653A8A /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = Platformer/Camera.cpp; sourceTree = "<group>"; };
 		11C16C7214A81BA100653A8A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = Platformer/Camera.h; sourceTree = "<group>"; };
 		11C16C7314A81BA100653A8A /* Credits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Credits.cpp; path = Platformer/Credits.cpp; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11352C7014B60A4900B44A1F /* icon-mac.icns */,
 				111E7B0214AA34AA00FE1C40 /* revisited.txt */,
 				1105C29814A9078800E8DB30 /* images */,
 				1105C29614A9078000E8DB30 /* Squada One.ttf */,
@@ -285,6 +288,7 @@
 				1105C29F14A9078800E8DB30 /* sheet0.bmp in Resources */,
 				1105C2A014A9078800E8DB30 /* title.bmp in Resources */,
 				111E7B0314AA34AA00FE1C40 /* revisited.txt in Resources */,
+				11352C7114B60A4900B44A1F /* icon-mac.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +344,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Platformer;
 				WRAPPER_EXTENSION = app;
@@ -360,6 +365,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Platformer;
 				WRAPPER_EXTENSION = app;

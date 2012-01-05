@@ -1,5 +1,3 @@
-// TODO: file comment header
-
 #include "Window.h"
 #include "Helper.h"
 
@@ -9,14 +7,15 @@ Window::Window(const char title[], int newWidth, int newHeight, int newBPP, bool
     windowedWidth = newWidth;
     windowedHeight = newHeight;
     bpp = newBPP;
-    
+
+    SDL_WM_SetCaption( title, NULL );
+
     minimumWindowedHeight = minimumWindowedWidth = 0;
     errors = false;
     isFullscreen = fullScreen;
     create_screen();
     errors = ( screen == NULL );
     
-    SDL_WM_SetCaption( title, NULL );
 }
 
 bool Window::error()
@@ -75,7 +74,7 @@ inline void Window::fullscreen( SDL_Event* anEvent )
 #endif
 #ifdef __APPLE__
         // set command to false because SDL currently "crashes" Mac OS X when fullscreen
-        command = false || ( key.mod & SDLK_LCOMMAND ) || ( key.mod & SDLK_RCOMMAND );
+        command = false || ( key.mod & KMOD_LCOMMAND ) || ( key.mod & KMOD_RCOMMAND );
 #endif
 
         if( ( control && f ) || ( command && f ) ){
@@ -101,26 +100,48 @@ inline void Window::close( SDL_Event* anEvent )
     }
     else if( anEvent->type == SDL_KEYDOWN )
     {
+        bool w = false, close = false, quit = false;
+        // w is used by all
+         w = ( anEvent->key.keysym.sym == SDLK_w );
+
+// handle command + q or command + w
 #ifdef __APPLE__
-        bool command, w, q;
-        command = w = q = false;
-        w = ( anEvent->key.keysym.sym == SDLK_w );
+        bool command, q;
+        command = q = false;
         q = ( anEvent->key.keysym.sym == SDLK_q );
-        command = ( anEvent->key.keysym.mod & SDLK_LCOMMAND ) || ( anEvent->key.keysym.mod & SDLK_RCOMMAND );
+        command = ( anEvent->key.keysym.mod & KMOD_LCOMMAND ) || ( anEvent->key.keysym.mod & KMOD_RCOMMAND );
         
         if( command && q )
+            quit = true;
+        else if( command && w )
+            close = true;
+#endif
+
+// handle alt-f4 or control+w on Windows
+#ifdef _WIN32
+        bool alt, f4, control;
+        alt = f4 = control = false;
+        f4 = ( anEvent->key.keysym.sym == SDLK_F4 );
+        control = ( anEvent->key.keysym.mod & KMOD_LCTRL ) || ( anEvent->key.keysym.mod & KMOD_RCTRL );
+        alt = ( anEvent->key.keysym.mod & KMOD_LALT ) || ( anEvent->key.keysym.mod & KMOD_RALT );
+
+        if( alt && f4 )
+            quit = true;
+        else if( control && w )
+            close = true;
+#endif
+
+        if( quit )
         {
             /* Post a SDL_QUIT event */
             SDL_Event event;
             event.type = SDL_QUIT;
             SDL_PushEvent(&event);
         }
-        else if( command && w )
+        else if( close )
         {
             state_helper->set_next_state( STATE_EXIT );
         }
-#endif
-        // alt-f4, control+w on Windows
     }
 }
 

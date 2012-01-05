@@ -18,8 +18,8 @@ const int SCREEN_BITS_PER_PIXEL = 32;
 const int FRAMES_PER_SECOND = 60;
 const int MINIMUM_SCREEN_WIDTH = 640;
 const int MINIMUM_SCREEN_HEIGHT = 480;
-const int SDLK_LCOMMAND = 1024;
-const int SDLK_RCOMMAND = 2048;
+const int KMOD_LCOMMAND = 1024;
+const int KMOD_RCOMMAND = 2048;
 
 // Font
 // TODO: why aren't these in CAPS!

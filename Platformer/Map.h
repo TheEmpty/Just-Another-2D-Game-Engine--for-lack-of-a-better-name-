@@ -15,7 +15,7 @@ private:
     const char* current_directive;
     
     void set_error( const char text[] );
-    void change_directive( std::string* line );
+    bool change_directive( std::string* line );
     void parse_from_line( std::string* line );
     std::string* get_key_val( std::string* line );
 public:

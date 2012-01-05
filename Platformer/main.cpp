@@ -10,6 +10,8 @@
 // RESPONSE: Just use 2 options on multiplayer cameras
 
 // Engine
+    // ASAP: load and display tiles from a map
+    // TODO: bring documentation back upto date
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
     // TODO: load map (meta data, tileset(s) data, tile data (collision), map data
     // TODO: Player in map (physics, control, gamepad, multiplayer)
@@ -100,6 +102,16 @@ int init()
     font = TTF_OpenFont( Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), 36 );
     if( font == NULL )
         return 3;
+
+    // Load icon, should be used alongside OS standards such as Mac's PLIST
+    // Avast seems to think the following code is a trojan...
+    SDL_Surface* icon = SDL_LoadBMP( Helper::get_path_for_resource( "images/heart.bmp" ).c_str() );
+    if( icon != NULL )
+    {
+        Uint32 colorKey = SDL_MapRGB( icon->format, 0, 255, 0 );
+        SDL_SetColorKey( icon, SDL_SRCCOLORKEY, colorKey );
+        SDL_WM_SetIcon( icon, NULL );
+    } else return 3;
 
     return 0;
 }
