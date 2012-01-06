@@ -60,6 +60,8 @@ public:
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
     void render( const Window* window );
+    
+    void get_message( int command, std::string* response ) {};
 };
 
 #endif //TITLE_H

@@ -10,7 +10,7 @@
      back
 */
 
-PlayState::PlayState( TTF_Font** newFont, int prev, char filename[] )
+PlayState::PlayState( TTF_Font** newFont, int prev, const char filename[] )
 {
     font = newFont;
     previous_state = prev;

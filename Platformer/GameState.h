@@ -10,6 +10,8 @@
 
 #include "SDL.h"
 #include "Window.h"
+#include <string>
+
 class Window;
 
 class GameState
@@ -33,6 +35,8 @@ public:
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
     virtual void render( const Window* window ) = 0;
+    
+    virtual void get_message( int command, std::string* response ) = 0;
 };
 
 #endif // GAMESTATE_H

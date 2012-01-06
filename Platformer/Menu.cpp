@@ -92,3 +92,11 @@ int Menu::getPos()
 {
     return selectedMenuItem;
 }
+
+const std::string* Menu::getText( int index )
+{
+    if( index < 0 || index > menuLength-1 )
+        return NULL;
+    else
+        return &menuText[index];
+}

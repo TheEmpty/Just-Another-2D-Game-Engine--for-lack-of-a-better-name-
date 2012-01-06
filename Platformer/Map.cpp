@@ -73,8 +73,8 @@ bool Map::change_directive( std::string* line )
             return true;
         }
         // events, cutscenes
-        return false;
     }
+    return false;
 }
 
 void Map::parse_from_line( std::string* line )

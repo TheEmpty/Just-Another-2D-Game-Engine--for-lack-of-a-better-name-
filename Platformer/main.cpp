@@ -12,8 +12,8 @@
 // Engine
     // ASAP: load and display tiles from a map
     // TODO: menu in PlayState
-    // TODO: select map before entering PlayState
-    // TODO: bring documentation back upto date
+    // TODO: pass selected map from SelectState to PlayState
+    // TODO: bring documentation back upto date and consitency (learning C++ a lot here)
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
     // TODO: load map (meta data, tileset(s) data, tile data (collision), map data
     // TODO: Player in map (physics, control, gamepad, multiplayer)
@@ -46,6 +46,7 @@
 #include "Title.h"
 #include "Window.h"
 #include "PlayState.h"
+#include "SelectState.h"
 #include <string>
 
 GameStateHelper* state_helper = GameStateHelper::Instance();
@@ -62,26 +63,39 @@ void change_state()
     // If the state needs to be changed
     if( state_helper->nextState != STATE_NULL )
     {
-        //Delete the current state
-        if( state_helper->nextState != STATE_EXIT )
-            delete state_helper->currentState;
-         
+        
+        GameState* newState = NULL;
+        
         // Change the state
         switch( state_helper->nextState )
         {
             case STATE_TITLE:
-                state_helper->currentState = new Title( &font, FONT_PADDING );
+                newState = new Title( &font, FONT_PADDING );
                 break;
             case STATE_CREDITS:
-                state_helper->currentState = new Credits( state_helper->stateID, &font, FONT_PADDING );
+                newState = new Credits( state_helper->stateID, &font, FONT_PADDING );
                 break;
             case STATE_MAP:
-                state_helper->currentState = new PlayState( &font, state_helper->stateID, "maps/revisited.txt" );
+                {
+                    std::string* file = new std::string;
+                    state_helper->currentState->get_message( 0, file );
+                    newState = new PlayState( &font, state_helper->stateID, file->c_str() );
+                    break;
+                }
+            case STATE_SELECT_MAP:
+                newState = new SelectState( &font );
                 break;
         }
-
+        
+        // Delete previous/current state and switch states
+        if( state_helper->nextState != STATE_EXIT ){
+            delete state_helper->currentState;
+            // Move newState to currentState
+            state_helper->currentState = newState; 
+        }
+        
         state_helper->stateID = state_helper->nextState;
-        state_helper->nextState = STATE_NULL;    
+        state_helper->nextState = STATE_NULL;  
     }
 }
 
@@ -106,7 +120,8 @@ int init()
         return 3;
 
     // Load icon, should be used alongside OS standards such as Mac's PLIST
-    // Avast seems to think the following code is a trojan...
+    // Avast seems to think the following code is a trojan... win32::downloader ftb
+    /*
     SDL_Surface* icon = SDL_LoadBMP( Helper::get_path_for_resource( "images/heart.bmp" ).c_str() );
     if( icon != NULL )
     {
@@ -114,6 +129,7 @@ int init()
         SDL_SetColorKey( icon, SDL_SRCCOLORKEY, colorKey );
         SDL_WM_SetIcon( icon, NULL );
     } else return 3;
+    */
 
     return 0;
 }

@@ -18,7 +18,7 @@ private:
     GameStateHelper* state_helper;
     
 public:
-    PlayState( TTF_Font** newFont, int prev, char filename[] );
+    PlayState( TTF_Font** newFont, int prev, const char filename[] );
     
     /**
      * @brief Frees the SDL_Surfaces used and any other responsabilites need to be performed for a clean deletion.
@@ -41,6 +41,8 @@ public:
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
     void render( const Window* window );
+    
+    void get_message( int command, std::string* response ) {};
 };
 
 #endif

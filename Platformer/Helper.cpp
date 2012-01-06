@@ -30,12 +30,6 @@ std::string Helper::lower_case( std::string orginal )
 
 std::string Helper::get_path_for_resource( std::string item )
 {
-#ifdef __APPLE__
-    // XCode removes all of our folders and puts all files into one resource folder
-    int last_index = item.find_last_of( "/" );
-    if( last_index != -1 )
-        item = item.substr( last_index, item.length() - last_index ); // take only the file name
-#endif
     return resourcePath + "/" + item;
 }
 

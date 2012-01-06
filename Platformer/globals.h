@@ -32,8 +32,9 @@ enum GameStates
     STATE_NULL,
     STATE_INTRO,
     STATE_TITLE,
-    STATE_CREDITS,
+    STATE_SELECT_MAP,
     STATE_MAP,
+    STATE_CREDITS,
     STATE_EXIT,
 };
 

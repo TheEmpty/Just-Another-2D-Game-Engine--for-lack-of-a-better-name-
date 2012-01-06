@@ -47,7 +47,7 @@ void Title::handle_event(const Window* window, SDL_Event* anEvent)
                 switch( menu->getPos() )
                 {
                     case( 0 ):
-                        state_helper->set_next_state( STATE_MAP );
+                        state_helper->set_next_state( STATE_SELECT_MAP );
                         break;
                     case( 2 ):
                         state_helper->set_next_state( STATE_CREDITS );

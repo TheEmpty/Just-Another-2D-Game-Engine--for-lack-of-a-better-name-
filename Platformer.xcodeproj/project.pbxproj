@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1105C29714A9078000E8DB30 /* Squada One.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1105C29614A9078000E8DB30 /* Squada One.ttf */; };
-		1105C29D14A9078800E8DB30 /* intro.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 1105C29914A9078800E8DB30 /* intro.bmp */; };
-		1105C29E14A9078800E8DB30 /* player.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 1105C29A14A9078800E8DB30 /* player.bmp */; };
-		1105C29F14A9078800E8DB30 /* sheet0.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 1105C29B14A9078800E8DB30 /* sheet0.bmp */; };
-		1105C2A014A9078800E8DB30 /* title.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 1105C29C14A9078800E8DB30 /* title.bmp */; };
 		111E7AFF14AA325F00FE1C40 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 111E7AFE14AA325F00FE1C40 /* Window.cpp */; };
-		111E7B0314AA34AA00FE1C40 /* revisited.txt in Resources */ = {isa = PBXBuildFile; fileRef = 111E7B0214AA34AA00FE1C40 /* revisited.txt */; };
 		11352C7114B60A4900B44A1F /* icon-mac.icns in Resources */ = {isa = PBXBuildFile; fileRef = 11352C7014B60A4900B44A1F /* icon-mac.icns */; };
+		11A3F16114B6A63400527FF0 /* PlayState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11A3F15F14B6A63400527FF0 /* PlayState.cpp */; };
+		11A3F16214B6A63400527FF0 /* SelectState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11A3F16014B6A63400527FF0 /* SelectState.cpp */; };
+		11A3F16714B6C1A600527FF0 /* maps in Resources */ = {isa = PBXBuildFile; fileRef = 11A3F16614B6C1A600527FF0 /* maps */; };
+		11A3F16914B6CAC900527FF0 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 11A3F16814B6CAC900527FF0 /* images */; };
 		11C16C8714A81BA100653A8A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7114A81BA100653A8A /* Camera.cpp */; };
 		11C16C8814A81BA100653A8A /* Credits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7314A81BA100653A8A /* Credits.cpp */; };
 		11C16C8914A81BA100653A8A /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7814A81BA100653A8A /* Helper.cpp */; };
@@ -29,7 +28,6 @@
 		11C16C9814A8235C00653A8A /* SDL_ttf.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 11C16C9614A8234600653A8A /* SDL_ttf.framework */; };
 		11C16C9A14A8237E00653A8A /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C16C9914A8237E00653A8A /* SDL.framework */; };
 		11C16C9B14A8238200653A8A /* SDL.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 11C16C9914A8237E00653A8A /* SDL.framework */; };
-		11D3DEF614B3EF0F00ECC6EC /* PlayState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11D3DEF514B3EF0F00ECC6EC /* PlayState.cpp */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -53,14 +51,15 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		1105C29614A9078000E8DB30 /* Squada One.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Squada One.ttf"; path = "Release/Squada One.ttf"; sourceTree = "<group>"; };
-		1105C29914A9078800E8DB30 /* intro.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = intro.bmp; sourceTree = "<group>"; };
-		1105C29A14A9078800E8DB30 /* player.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = player.bmp; sourceTree = "<group>"; };
-		1105C29B14A9078800E8DB30 /* sheet0.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = sheet0.bmp; sourceTree = "<group>"; };
-		1105C29C14A9078800E8DB30 /* title.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = title.bmp; sourceTree = "<group>"; };
 		111E7AFE14AA325F00FE1C40 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Window.cpp; path = Platformer/Window.cpp; sourceTree = "<group>"; };
 		111E7B0114AA326900FE1C40 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window.h; path = Platformer/Window.h; sourceTree = "<group>"; };
-		111E7B0214AA34AA00FE1C40 /* revisited.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = revisited.txt; path = Release/maps/revisited.txt; sourceTree = "<group>"; };
 		11352C7014B60A4900B44A1F /* icon-mac.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "icon-mac.icns"; sourceTree = "<group>"; };
+		11A3F15F14B6A63400527FF0 /* PlayState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayState.cpp; path = Platformer/PlayState.cpp; sourceTree = "<group>"; };
+		11A3F16014B6A63400527FF0 /* SelectState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectState.cpp; path = Platformer/SelectState.cpp; sourceTree = "<group>"; };
+		11A3F16314B6A63E00527FF0 /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayState.h; path = Platformer/PlayState.h; sourceTree = "<group>"; };
+		11A3F16414B6A63E00527FF0 /* SelectState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectState.h; path = Platformer/SelectState.h; sourceTree = "<group>"; };
+		11A3F16614B6C1A600527FF0 /* maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = maps; path = Release/maps; sourceTree = "<group>"; };
+		11A3F16814B6CAC900527FF0 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = Release/images; sourceTree = "<group>"; };
 		11C16C7114A81BA100653A8A /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = Platformer/Camera.cpp; sourceTree = "<group>"; };
 		11C16C7214A81BA100653A8A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = Platformer/Camera.h; sourceTree = "<group>"; };
 		11C16C7314A81BA100653A8A /* Credits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Credits.cpp; path = Platformer/Credits.cpp; sourceTree = "<group>"; };
@@ -86,8 +85,6 @@
 		11C16C9614A8234600653A8A /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL_ttf.framework; sourceTree = "<group>"; };
 		11C16C9914A8237E00653A8A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL.framework; sourceTree = "<group>"; };
 		11C16C9C14A8255B00653A8A /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = Platformer/include/SDL_ttf.h; sourceTree = "<group>"; };
-		11D3DEF314B3EE5800ECC6EC /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayState.h; sourceTree = "<group>"; };
-		11D3DEF514B3EF0F00ECC6EC /* PlayState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayState.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -120,7 +117,8 @@
 				11C16C7B14A81BA100653A8A /* Intro.h */,
 				11C16C7E14A81BA100653A8A /* Map.h */,
 				11C16C8014A81BA100653A8A /* Menu.h */,
-				11D3DEF314B3EE5800ECC6EC /* PlayState.h */,
+				11A3F16314B6A63E00527FF0 /* PlayState.h */,
+				11A3F16414B6A63E00527FF0 /* SelectState.h */,
 				11C16C8114A81BA100653A8A /* SDLMain.h */,
 				11C16C8414A81BA100653A8A /* Timer.h */,
 				11C16C8614A81BA100653A8A /* Title.h */,
@@ -148,18 +146,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		1105C29814A9078800E8DB30 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				1105C29914A9078800E8DB30 /* intro.bmp */,
-				1105C29A14A9078800E8DB30 /* player.bmp */,
-				1105C29B14A9078800E8DB30 /* sheet0.bmp */,
-				1105C29C14A9078800E8DB30 /* title.bmp */,
-			);
-			name = images;
-			path = Release/images;
-			sourceTree = "<group>";
-		};
 		11D3DEF714B3EF3C00ECC6EC /* Implementations */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,7 +156,8 @@
 				11C16C7C14A81BA100653A8A /* main.cpp */,
 				11C16C7D14A81BA100653A8A /* Map.cpp */,
 				11C16C7F14A81BA100653A8A /* Menu.cpp */,
-				11D3DEF514B3EF0F00ECC6EC /* PlayState.cpp */,
+				11A3F15F14B6A63400527FF0 /* PlayState.cpp */,
+				11A3F16014B6A63400527FF0 /* SelectState.cpp */,
 				11C16C8214A81BA100653A8A /* SDLMain.m */,
 				11C16C8314A81BA100653A8A /* Timer.cpp */,
 				11C16C8514A81BA100653A8A /* Title.cpp */,
@@ -211,9 +198,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11A3F16814B6CAC900527FF0 /* images */,
+				11A3F16614B6C1A600527FF0 /* maps */,
 				11352C7014B60A4900B44A1F /* icon-mac.icns */,
-				111E7B0214AA34AA00FE1C40 /* revisited.txt */,
-				1105C29814A9078800E8DB30 /* images */,
 				1105C29614A9078000E8DB30 /* Squada One.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -283,12 +270,9 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1105C29714A9078000E8DB30 /* Squada One.ttf in Resources */,
-				1105C29D14A9078800E8DB30 /* intro.bmp in Resources */,
-				1105C29E14A9078800E8DB30 /* player.bmp in Resources */,
-				1105C29F14A9078800E8DB30 /* sheet0.bmp in Resources */,
-				1105C2A014A9078800E8DB30 /* title.bmp in Resources */,
-				111E7B0314AA34AA00FE1C40 /* revisited.txt in Resources */,
 				11352C7114B60A4900B44A1F /* icon-mac.icns in Resources */,
+				11A3F16714B6C1A600527FF0 /* maps in Resources */,
+				11A3F16914B6CAC900527FF0 /* images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +294,8 @@
 				11C16C8F14A81BA100653A8A /* Timer.cpp in Sources */,
 				11C16C9014A81BA100653A8A /* Title.cpp in Sources */,
 				111E7AFF14AA325F00FE1C40 /* Window.cpp in Sources */,
-				11D3DEF614B3EF0F00ECC6EC /* PlayState.cpp in Sources */,
+				11A3F16114B6A63400527FF0 /* PlayState.cpp in Sources */,
+				11A3F16214B6A63400527FF0 /* SelectState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

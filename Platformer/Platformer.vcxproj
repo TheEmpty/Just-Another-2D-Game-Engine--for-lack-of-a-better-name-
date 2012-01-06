@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Credits.h" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateHelper.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SelectState.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Window.h" />
@@ -100,9 +102,16 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="SelectState.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Platformer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\icon-windows.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

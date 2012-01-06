@@ -52,7 +52,7 @@ public:
     int nextState;
 
     /**
-     * @breif Returns pointer to current state object.
+     * @breif Pointer to current state object.
      */
     GameState* currentState;
 
