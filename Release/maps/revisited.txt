@@ -5,7 +5,7 @@ Information:
  background: (100,99,99)
 
 Tileset:
- file: ../images/sheet0.bmp
+ file: images/sheet0.bmp
  width: 192
  height: 64
  tile_width: 64

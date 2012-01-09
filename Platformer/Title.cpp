@@ -14,6 +14,7 @@ Title::Title( TTF_Font** newFont, int newPadding )
     padding = newPadding;
     
     background = Helper::load_image( Helper::get_path_for_resource( "images/title.bmp" ) );
+    backgroundColor = 0;
     
     // Menu
     menu = new Menu( font, defaultFontColor, activeFontColor, 4 );
@@ -84,14 +85,14 @@ void Title::logic( const Window* window )
 
 void Title::render( const Window* window )
 {
-    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
+    if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
+    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
 
     int x, y;
     x = ( window->get_width() - background->w ) / 2;
     y = ( window->get_height() - background->h ) / 2;
     Helper::apply_surface( x, y, background, window->get_screen() );
     
-    x = 0;
     y += 60;
     if( 0 > y ) y = 0;
     

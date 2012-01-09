@@ -4,6 +4,7 @@
 Window::Window(const char title[], int newWidth, int newHeight, int newBPP, bool fullScreen)
 {
     state_helper = GameStateHelper::Instance();
+    camera = new Camera();
     windowedWidth = newWidth;
     windowedHeight = newHeight;
     bpp = newBPP;
@@ -107,7 +108,7 @@ inline void Window::close( SDL_Event* anEvent )
 // handle command + q or command + w
 #ifdef __APPLE__
         bool command, q;
-        command = q = false;
+        
         q = ( anEvent->key.keysym.sym == SDLK_q );
         command = ( anEvent->key.keysym.mod & KMOD_LCOMMAND ) || ( anEvent->key.keysym.mod & KMOD_RCOMMAND );
         

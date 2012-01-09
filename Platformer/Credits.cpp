@@ -11,6 +11,7 @@ Credits::Credits( int prev, TTF_Font** newFont, int newPadding )
 {
     state_helper = GameStateHelper::Instance();
     prev_state = prev;
+    backgroundColor = 0;
     font = newFont;
     padding = newPadding;
     create_messages();
@@ -65,8 +66,8 @@ void Credits::handle_event(const Window* window, SDL_Event* anEvent)
 
 void Credits::render( const Window* window )
 {
-    
-    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
+    if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
+    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
 
     int height = 0;
     for( int i = 0; i < messages; i++ )

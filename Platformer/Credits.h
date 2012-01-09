@@ -23,6 +23,8 @@ private:
     int prev_state;
     // Space to add between lines (excluding the text height)
     int padding;
+    
+    Uint32 backgroundColor;
 
     // A pointer to an array of SDL_Surface pointers. Allowing us to dynamically create an SDL_Surface array without memory errors.
     SDL_Surface** message;

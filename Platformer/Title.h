@@ -22,6 +22,7 @@ private:
     int padding;
     // Background image.
     SDL_Surface *background;
+    Uint32 backgroundColor;
     // Menu.
     Menu *menu;
     // Font to use on menu.

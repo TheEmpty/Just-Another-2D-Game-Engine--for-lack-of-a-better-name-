@@ -13,6 +13,7 @@ SelectState::SelectState(TTF_Font** newFont)
 {
     font = newFont;
     state_helper = GameStateHelper::Instance();
+    backgroundColor = 0;
     load_files();
 }
 
@@ -97,7 +98,8 @@ void SelectState::logic( const Window* window )
 
 void SelectState::render( const Window* window )
 {
-    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
+    if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
+    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
     
     int x, max;
     int y = 8;

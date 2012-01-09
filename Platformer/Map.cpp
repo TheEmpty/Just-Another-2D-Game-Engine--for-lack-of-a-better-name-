@@ -1,16 +1,22 @@
 #include "Map.h"
 #include "Helper.h"
 #include <fstream>
+#include <sstream>
 
 void Map::load_map( const char filename[] )
 {
+    line_number = 0;
+    
     std::ifstream mapFile;
     mapFile.open( Helper::get_path_for_resource( std::string( filename ) ).c_str() );
-    line_number = 0;
 
     if (mapFile.is_open())
     {
+        std::string working_directory = std::string( filename );
+        working_directory.erase( working_directory.find_last_of("/\\") );
+        
         std::string line;
+        
         current_directive = NULL;
 
         while ( error.empty() && mapFile.good() )
@@ -22,6 +28,8 @@ void Map::load_map( const char filename[] )
 
         mapFile.close();
         Helper::debug(150, "Loaded: %s", info[ "name" ].c_str() );
+        // 19 by 11
+        Helper::debug(250, "Map is %i by %i tiles", (int) map[0].size(), map.size());
     }
     else
     {
@@ -64,6 +72,42 @@ bool Map::change_directive( std::string* line )
         }
         else if( strncmp( current_directive, "tileset", 7 ) == 0 && stripped == "tiles" )
         {
+            // create tileset surface with clipings
+            if( info[ "file" ].empty() || info[ "width" ].empty() || info[ "height" ].empty() || info[ "tile_width" ].empty() || info[ "tile_height" ].empty() ){
+                set_error( "Missing tileset file, width, height, tile_width, or tile_height." );
+            } else {
+                // load surface
+                tileset = SDL_LoadBMP( Helper::get_path_for_resource( working_directory + info[ "file" ] ).c_str() );
+                // clipings
+                if( tileset != NULL )
+                {
+                    int x = 0, y = 0;
+                    int tile_width  = atoi( info[ "tile_width" ].c_str() );
+                    int tile_height = atoi( info[ "tile_height" ].c_str() );
+                    
+                    // we have not exceded the height of the tileset
+                    while( y < tileset->h )
+                    {
+                        // we have not exceded the width of the tileset
+                        while( x < tileset->w )
+                        {
+                            SDL_Rect current;
+                            current.x = x;
+                            current.y = y;
+                            current.w = tile_width;
+                            current.h = tile_height;
+                            clips.push_back( current );
+                            x += tile_width;
+                        }
+                        y += tile_height;
+                    }
+                }
+                else
+                {
+                    set_error( "Unable to load tileset" );
+                }
+            }
+            // next directive
             current_directive = "tiles";
             return true;
         }
@@ -72,7 +116,12 @@ bool Map::change_directive( std::string* line )
             current_directive = "map";
             return true;
         }
-        // events, cutscenes
+        else if( strncmp( current_directive, "map", 3) == 0 && stripped == "events" )
+        {
+            current_directive = "events";
+            return true;
+        }
+        // cutscenes
     }
     return false;
 }
@@ -86,6 +135,35 @@ void Map::parse_from_line( std::string* line )
             std::string key, value;
             get_key_val( line, &key, &value );
             if( key.empty() == false && value.empty() == false ) info[ key ] = value;
+        }
+        else if( strncmp( current_directive, "tileset", 7 ) == 0 )
+        {
+            std::string key, value;
+            get_key_val( line, &key, &value );
+            if( key.empty() == false && value.empty() == false ) info[ key ] = value;
+        }
+        else if( strncmp( current_directive, "map", 3 ) == 0 )
+        {
+            std::stringstream stream( line->c_str() );
+            std::string item;
+            std::vector<int> elements;
+            
+            while(std::getline(stream, item, ' ')) {
+                if( item.empty() == false ) elements.push_back( std::atoi(item.c_str()) );
+            }
+            
+            if( elements.size() == 0 )
+            {
+                set_error( "Blank line during map definition" );
+            }
+            else if( map.size() > 0 && map[0].size() != elements.size() )
+            {
+                set_error( "Line does not have same length as first map line." );
+            }
+            else
+            {
+                map.push_back( elements );
+            }
         }
     }
 }
@@ -124,6 +202,34 @@ void Map::get_key_val( std::string* line, std::string* key, std::string* value )
     {
         value->clear();
         value->append( line->substr( start, end - start ) );
+    }
+}
+
+void Map::render(SDL_Surface *screen, Camera *camera)
+{
+    // find x,y of top left corner, then draw from left to right
+    int tile_width = atoi( info[ "tile_width" ].c_str() );
+    int tile_height =  atoi( info[ "tile_height" ].c_str() );
+    int x = camera->view.x / tile_width;
+    int y = camera->view.y / tile_height;
+    int width = map[0].size();
+    int height = map.size();
+    
+    // while we have not reached the bottom
+    while( ( y * tile_height ) < screen->h )
+    {
+        if( y > map.size() ) break;
+        // while we have not reached the side
+        while( ( x * tile_width ) < screen->w )
+        {
+            if( x > map[0].size() ) break;
+            
+            Helper::apply_surface(x * tile_width, y * tile_height, tileset, screen, &clips[ map[y][x] ]);
+            
+            x += 1;
+        }
+        y += 1;
+        x = 0;
     }
 }
 

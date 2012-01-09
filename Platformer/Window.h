@@ -10,7 +10,8 @@
 
 #include "SDL.h"
 #include "globals.h"
-#include "GameStateHelper.h" // includes GameStateHelper which includes GameState which includes Window...
+#include "GameStateHelper.h"
+#include "Camera.h"
 
 class Window
 {
@@ -30,6 +31,8 @@ private:
 public:
     Window(const char title[], int newWidth = DEFAULT_SCREEN_WIDTH, int newHeight = DEFAULT_SCREEN_HEIGHT, int screen_bpp = SCREEN_BITS_PER_PIXEL, bool fullScreen = false);
     
+    Camera* camera;
+    
     int fullscreenWidth;
     int fullscreenHeight;
     bool screenChange;
@@ -45,6 +48,7 @@ public:
     int get_height() const { return isFullscreen ? fullscreenHeight : windowedHeight; }
     int get_bpp() const { return bpp; }
     bool get_screen_changed() const { return screenChange; }
+    Camera* get_camera() const { return camera; }
     
     void set_width( int newWidth );
     void set_height( int newHeight );

@@ -15,8 +15,9 @@ PlayState::PlayState( TTF_Font** newFont, int prev, const char filename[] )
     font = newFont;
     previous_state = prev;
     state_helper = GameStateHelper::Instance();
+    backgroundColor = 0;
+    
     map.load_map( filename );
-    if( map.get_error()->empty() == false )  tile_layer = NULL;
     Helper::debug(200, "map.get_error(): %s", map.get_error()->c_str());
 }
 
@@ -49,9 +50,14 @@ void PlayState::logic(const Window *window)
 
 void PlayState::render(const Window *window)
 {
-    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, SDL_MapRGB( window->get_screen()->format, 100, 99, 99 ) );
+    if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
+    SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
     
-    if( tile_layer == NULL )
+    if( map.get_error()->empty() )
+    {
+        map.render( window->get_screen(), window->get_camera() );
+    }
+    else
     {
         // display error
         SDL_Surface* error = TTF_RenderText_Solid( *font, map.get_error()->c_str(), defaultFontColor );

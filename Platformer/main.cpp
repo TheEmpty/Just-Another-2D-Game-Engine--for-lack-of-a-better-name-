@@ -10,8 +10,9 @@
 // RESPONSE: Just use 2 options on multiplayer cameras
 
 // Engine
-    // ASAP: load and display tiles from a map
     // TODO: menu in PlayState
+    // TODO: parse "Tiles" section (physics)
+    // TODO: basic character class
     // TODO: pass selected map from SelectState to PlayState
     // TODO: bring documentation back upto date and consitency (learning C++ a lot here)
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)

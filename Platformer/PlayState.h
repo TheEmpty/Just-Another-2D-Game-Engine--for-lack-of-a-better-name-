@@ -11,6 +11,7 @@
 class PlayState : public GameState
 {
 private:
+    Uint32 backgroundColor;
     SDL_Surface* tile_layer;
     TTF_Font** font;
     Map map;

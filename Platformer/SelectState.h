@@ -11,6 +11,7 @@
 class SelectState : public GameState
 {
 private:
+    Uint32 backgroundColor;
     TTF_Font** font; // pointer to a pointer
     SDL_Surface** list; // array of SDL_Surface pointers
     Menu* menu;
