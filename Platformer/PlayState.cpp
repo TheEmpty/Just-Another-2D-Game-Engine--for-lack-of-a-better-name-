@@ -83,32 +83,27 @@ void PlayState::handle_event(const JA2GE::Window *window, SDL_Event *anEvent)
 
 void PlayState::logic(const JA2GE::Window *window)
 {
-    if( paused && pausedMenu == NULL )
+    // check button downs, change player velocity
+    Uint8 *keystates = SDL_GetKeyState( NULL );
+    
+    player.setXVel( 0 );
+    player.setYVel( 0 );
+    
+    if( !paused )
     {
+        if     ( keystates[ SDLK_UP ]    || keystates[ SDLK_w ] ) player.setYVel( -5.0 );
+        else if( keystates[ SDLK_DOWN ]  || keystates[ SDLK_s ] ) player.setYVel(  5.0 );
+        if     ( keystates[ SDLK_LEFT ]  || keystates[ SDLK_a ] ) player.setXVel( -5.0 );
+        else if( keystates[ SDLK_RIGHT ] || keystates[ SDLK_d ] ) player.setXVel(  5.0 );
         
-    } else {
-        // check button downs, change player velocity
-        Uint8 *keystates = SDL_GetKeyState( NULL );
-        
-        player.setXVel( 0 );
-        player.setYVel( 0 );
-        
-        if( !paused )
+        if( keystates[ SDLK_RSHIFT ] || keystates[ SDLK_LSHIFT ] )
         {
-            if     ( keystates[ SDLK_UP ]    || keystates[ SDLK_w ] ) player.setYVel( -5.0 );
-            else if( keystates[ SDLK_DOWN ]  || keystates[ SDLK_s ] ) player.setYVel(  5.0 );
-            if     ( keystates[ SDLK_LEFT ]  || keystates[ SDLK_a ] ) player.setXVel( -5.0 );
-            else if( keystates[ SDLK_RIGHT ] || keystates[ SDLK_d ] ) player.setXVel(  5.0 );
-            
-            if( keystates[ SDLK_RSHIFT ] || keystates[ SDLK_LSHIFT ] )
-            {
-                player.setYVel( player.getYVel() * FRAMES_PER_SECOND * 2.5 );
-                player.setXVel( player.getXVel() * FRAMES_PER_SECOND * 2.5 );
-            }
-            
-            // move everything on the map (Players)
-            map.move();
+            player.setYVel( player.getYVel() * FRAMES_PER_SECOND * 2.5 );
+            player.setXVel( player.getXVel() * FRAMES_PER_SECOND * 2.5 );
         }
+        
+        // move everything on the map (Players)
+        map.move();
     }
 }
 

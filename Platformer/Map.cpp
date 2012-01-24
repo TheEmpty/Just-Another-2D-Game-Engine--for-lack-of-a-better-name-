@@ -125,22 +125,24 @@ namespace JA2GE
                     {
                         int tile = map[i][j];
                         
-                        GameObject* obj;
-                        // Convert for deep copy
-                        InvisableRectangle* test = (InvisableRectangle*) tile_physic_templates[ tile ];
-                        if( test != NULL ){
-                            obj = new InvisableRectangle( *tile_physic_templates[ tile ] );
-                        }
-                        
-                        if( obj != NULL )
+                        if( tile_physic_templates[ tile ] != NULL )
                         {
-                            int offSet = 1;
-                            if( j == 0 ) offSet = 0;
-                            obj->set_y( i * atoi(info["tile_height"].c_str()) );
-                            obj->set_x( (j+offSet) * atoi(info["tile_width"].c_str()) );
-                            stable_items.push_back( obj );
+                        
+                            GameObject* obj;
+                            // Convert for deep copy
+                            InvisableRectangle* test = (InvisableRectangle*) tile_physic_templates[ tile ];
+                            
+                            if( test != NULL ){
+                                obj = new InvisableRectangle( *tile_physic_templates[ tile ] );
+                            }
+                            
+                            if( obj != NULL )
+                            {
+                                obj->set_y( i * atoi(info["tile_height"].c_str()) );
+                                obj->set_x( j * atoi(info["tile_width"].c_str()) );
+                                stable_items.push_back( obj );
+                            }
                         }
-                        if( j == 0 ) Helper::debug( 200, "%i-1 %s", stable_items.size(), stable_items[stable_items.size()-1]->c_str() );
                     }
                 }
                 
@@ -359,7 +361,6 @@ namespace JA2GE
             // TODO: moving_items check against moving_items
             for( int j = stable_items.size() - 1; j >= 0; j-- )
             {
-                // if( j == 19 ) Helper::debug( 200, "Checking %i - %s", j, stable_items[j]->c_str() );
                 if( moving_items[i]->collides( *stable_items[j] ) )
                 {
                     moving_items[i]->unmove();

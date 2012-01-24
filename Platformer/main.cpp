@@ -5,12 +5,11 @@
  * @author Mohammad El-Abid
  */
 
-// Engine  
-    // TODO: physics bug (Elements on the line x = 0 && y > 1 don't seem to collide)
-    // TODO: menu crashes when constently spawned/deleted (press escape a few times really quick in PlayState, should just render once)
+// Engine 
     // TODO: bring documentation back upto date and consitency (learning C++ a lot here)
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
     // TODO: instead of "unmove" would be nice if it didn't move into the wall. So diagonal force would just ignore one force instead of both)
+    // TODO: also to put it as close to the object as it can instead of last known working position
     // TODO: gravity
     // TODO: animation
 
@@ -26,6 +25,7 @@
     // TODO: SDL 1.3, SDL 1.3 SDL_TTF, SDL 1.3 desktop width/height
 
 // Application 
+    // TODO: At least fix the intro instead of showing black borders
     // TODO: An intro that is actually a level and a player running through it would be cool.
 
 #include "Camera.h"

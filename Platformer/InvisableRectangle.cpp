@@ -11,9 +11,9 @@ namespace JA2GE
         if( rect != NULL )
         {
             //The sides of the rectangles
-            int leftA, leftB;
-            int rightA, rightB;
-            int topA, topB;
+            int leftA,   leftB;
+            int rightA,  rightB;
+            int topA,    topB;
             int bottomA, bottomB;
             
             //Calculate the sides of rect A
@@ -29,10 +29,10 @@ namespace JA2GE
             bottomB = rect->get_dim()->y + rect->get_dim()->h;
             
             //If any of the sides from A are outside of B
-            if( bottomA <= topB ) return false;
-            if( topA >= bottomB ) return false;
-            if( rightA <= leftB ) return false;
-            if( leftA >= rightB ) return false;
+            if( bottomA <= topB )    return false;
+            if( topA    >= bottomB ) return false;
+            if( rightA  <= leftB )   return false;
+            if( leftA   >= rightB )  return false;
             
             //If none of the sides from A are outside B
             return true;

@@ -8,9 +8,7 @@ Player::Player()
     sheet = NULL;
     set_dim( 0, 0, PLAYER_WIDTH, PLAYER_HEIGHT );
     // TODO: this is test stuff ;)
-    // Helper::debug ('cuz that's what I search for)
     set_dim( PLAYER_WIDTH * 2, PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT );
-    // yVal = -5.0;
     // E/O test
     clipping.x = clipping.y = 0;
     clipping.w = PLAYER_WIDTH;
