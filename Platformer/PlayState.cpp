@@ -12,14 +12,20 @@ PlayState::PlayState( TTF_Font** newFont, int prev, const char filename[] )
     map.load_map( filename );
     if( map.get_error()->empty() )
     {
+        // Load player into map
         player.init();
         map.moving_items.push_back( &player );
+        // Create Menu
+        pausedMenu = new Menu( font, defaultFontColor, activeFontColor, 3 );
+        pausedMenu->setText( 0, "Resume" );
+        pausedMenu->setText( 1, "Reselect" );
+        pausedMenu->setText( 2, "Main Menu" );
     }
 }
 
 PlayState::~PlayState()
 {
-    if( pausedMenu != NULL ) delete pausedMenu;
+    delete pausedMenu;
 }
 
 void PlayState::handle_event(const JA2GE::Window *window, SDL_Event *anEvent)
@@ -47,7 +53,6 @@ void PlayState::handle_event(const JA2GE::Window *window, SDL_Event *anEvent)
             {
                 case( SDLK_ESCAPE ):
                     paused = !paused;
-                    if( pausedMenu != NULL && paused == false ) delete pausedMenu;
                     break;
                 case( SDLK_UP ):
                 case( SDLK_DOWN ):
@@ -80,10 +85,7 @@ void PlayState::logic(const JA2GE::Window *window)
 {
     if( paused && pausedMenu == NULL )
     {
-        pausedMenu = new Menu( font, defaultFontColor, activeFontColor, 3 );
-        pausedMenu->setText( 0, "Resume" );
-        pausedMenu->setText( 1, "Reselect" );
-        pausedMenu->setText( 2, "Main Menu" );
+        
     } else {
         // check button downs, change player velocity
         Uint8 *keystates = SDL_GetKeyState( NULL );
