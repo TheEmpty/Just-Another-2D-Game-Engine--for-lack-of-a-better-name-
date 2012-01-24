@@ -9,11 +9,11 @@
 
 Title::Title( TTF_Font** newFont, int newPadding )
 {
-    state_helper = GameStateHelper::Instance();
+    state_helper = JA2GE::GameStateHelper::Instance();
     font = newFont;
     padding = newPadding;
     
-    background = Helper::load_image( Helper::get_path_for_resource( "images/title.bmp" ) );
+    background = JA2GE::Helper::load_image( JA2GE::Helper::get_path_for_resource( "images/title.bmp" ) );
     backgroundColor = 0;
     
     // Menu
@@ -30,7 +30,7 @@ Title::~Title()
     SDL_FreeSurface( background );
 }
 
-void Title::handle_event(const Window* window, SDL_Event* anEvent)
+void Title::handle_event(const JA2GE::Window* window, SDL_Event* anEvent)
 {
     if( anEvent->type == SDL_KEYDOWN )
     {
@@ -62,7 +62,7 @@ void Title::handle_event(const Window* window, SDL_Event* anEvent)
     }
 }
 
-void Title::logic( const Window* window )
+void Title::logic( const JA2GE::Window* window )
 {
     if( window->screenChange )
         menu->redraw();
@@ -83,7 +83,7 @@ void Title::logic( const Window* window )
     }
 }
 
-void Title::render( const Window* window )
+void Title::render( const JA2GE::Window* window )
 {
     if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
     SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
@@ -91,7 +91,7 @@ void Title::render( const Window* window )
     int x, y;
     x = ( window->get_width() - background->w ) / 2;
     y = ( window->get_height() - background->h ) / 2;
-    Helper::apply_surface( x, y, background, window->get_screen() );
+    JA2GE::Helper::apply_surface( x, y, background, window->get_screen() );
     
     y += 60;
     if( 0 > y ) y = 0;
@@ -101,7 +101,7 @@ void Title::render( const Window* window )
     {
         SDL_Surface *item = menu->getMenuItem( i );
         x = ( window->get_width() - item->w ) / 2; // center it
-        Helper::apply_surface( x, y, item, window->get_screen() );
+        JA2GE::Helper::apply_surface( x, y, item, window->get_screen() );
         y += item->h + padding;
     }
 }

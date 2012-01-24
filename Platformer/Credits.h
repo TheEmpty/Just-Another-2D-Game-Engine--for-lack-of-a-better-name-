@@ -14,7 +14,7 @@
 #ifndef CREDITS_H
 #define CREDITS_H
 
-class Credits : public GameState
+class Credits : public JA2GE::GameState
 {
 private:
     // Number of lines
@@ -31,7 +31,7 @@ private:
     // A pointer to the pointer to the font to be used for all the text
     TTF_Font** font;
     // State manager
-    GameStateHelper *state_helper;
+    JA2GE::GameStateHelper *state_helper;
 
     // Recursive function for getting the height of a row, or the first non NULL row if row is NULL (blank line)
     int get_height( int index );
@@ -55,19 +55,19 @@ public:
     /**
      * @brief Handle "events" generally user input.
      */
-    void handle_event( const Window* window, SDL_Event* anEvent );
+    void handle_event( const JA2GE::Window* window, SDL_Event* anEvent );
 
     /**
      * @brief Handle any logic such as physics or autosave.
      */
-    void logic( const Window* window );
+    void logic( const JA2GE::Window* window );
 
     /**
      * @brief Renders graphics to the supplied surface.
      *
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
-    void render( const Window* window );
+    void render( const JA2GE::Window* window );
     
     void get_message( int command, std::string* response ) {};
 };

@@ -9,11 +9,11 @@
 
 Intro::Intro( TTF_Font** newFont ) // take font
 {
-    state_helper = GameStateHelper::Instance();
+    state_helper = JA2GE::GameStateHelper::Instance();
     font = newFont;
 
     //Load the background
-    background = Helper::load_image( Helper::get_path_for_resource("images/intro.bmp").c_str() );
+    background = JA2GE::Helper::load_image( JA2GE::Helper::get_path_for_resource("images/intro.bmp").c_str() );
     message = TTF_RenderText_Solid( *font, "Version 0.0.5", defaultFontColor );
 
     //Monitor how long they have looked at the version
@@ -27,7 +27,7 @@ Intro::~Intro()
     SDL_FreeSurface( message );
 }
 
-void Intro::handle_event(const Window* window, SDL_Event* anEvent)
+void Intro::handle_event(const JA2GE::Window* window, SDL_Event* anEvent)
 {
     // mouse click or key buttons = skip
     if( ( anEvent->type == SDL_KEYDOWN ) || ( anEvent->type == SDL_MOUSEBUTTONDOWN ) )
@@ -36,15 +36,15 @@ void Intro::handle_event(const Window* window, SDL_Event* anEvent)
     }
 }
 
-void Intro::logic( const Window* window )
+void Intro::logic( const JA2GE::Window* window )
 {
     // 3sec max on intro
     if( wait.get_ticks() >= 3000 )
         state_helper->set_next_state( STATE_TITLE );
 }
 
-void Intro::render( const Window* window )
+void Intro::render( const JA2GE::Window* window )
 {
-    Helper::apply_surface( 0, 0, background, window->get_screen() );
-    Helper::apply_surface( 0, ( window->get_height() - message->h ), message, window->get_screen() );
+    JA2GE::Helper::apply_surface( 0, 0, background, window->get_screen() );
+    JA2GE::Helper::apply_surface( 0, ( window->get_height() - message->h ), message, window->get_screen() );
 }

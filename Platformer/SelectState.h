@@ -8,14 +8,14 @@
 #include "Menu.h"
 #include "Timer.h"
 
-class SelectState : public GameState
+class SelectState : public JA2GE::GameState
 {
 private:
     Uint32 backgroundColor;
     TTF_Font** font; // pointer to a pointer
     SDL_Surface** list; // array of SDL_Surface pointers
     Menu* menu;
-    GameStateHelper* state_helper;
+    JA2GE::GameStateHelper* state_helper;
     // Used to tell how long since last reaction to held key.
     Timer reaction;
     
@@ -33,19 +33,19 @@ public:
     /**
      * @brief Handle "events" generally user input.
      */
-    void handle_event(const Window* window, SDL_Event* anEvent);
+    void handle_event(const JA2GE::Window* window, SDL_Event* anEvent);
     
     /**
      * @brief Handle any logic such as physics or autosave.
      */
-    void logic( const Window* window );
+    void logic( const JA2GE::Window* window );
     
     /**
      * @brief Renders graphics to the supplied surface.
      *
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
-    void render( const Window* window );
+    void render( const JA2GE::Window* window );
 
     void get_message( int command, std::string* response ) { get_selected_file( response ); };
 };

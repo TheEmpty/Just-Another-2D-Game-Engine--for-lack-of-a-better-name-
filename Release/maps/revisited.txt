@@ -2,7 +2,7 @@ Information:
  name:    Revisited
  creator: Mohammad El-Abid
  email:   mohammad@el-abid.com
- background: (100,99,99)
+ background: (99,99,99)
 
 Tileset:
  file: images/sheet0.bmp
@@ -17,22 +17,51 @@ Tiles:
  02: rect(0,0,64,64)
 
 Map:
- 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02
+ 01 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 01
  02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
  02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
- 01 02 02 02 02 01 00 00 00 01 02 02 02 01 02 02 01 00 02
- 02 00 00 00 00 00 00 00 00 00 00 00 00 01 02 02 02 00 02
- 02 00 00 00 00 00 00 00 00 00 00 00 00 01 02 02 02 00 02
- 01 02 02 02 01 00 00 00 01 02 02 02 01 01 02 02 02 00 02
- 02 00 00 00 00 00 00 00 02 00 00 00 00 01 02 02 02 00 02
- 02 00 00 00 00 00 00 00 02 00 00 00 00 01 02 02 02 00 02
- 02 00 00 00 00 00 00 00 02 00 00 00 00 01 02 02 01 00 02
- 02 02 02 02 02 02 02 02 01 02 02 02 02 01 02 02 02 02 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 02
+ 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01 00 02
+ 01 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 01
 
 Events:
   (2,-2) SPAWN
   (-2,-2) GOAL
-  (2,2) HAS player THEN SET player cord (-2,-2) 
-  (2,0,-0) HAS player THEN SPAWN ONCE monster2
+  (2,2) HAS player THEN SET player CORD (-2,-2) 
+  (2,0,2,-1) HAS player THEN SPAWN ONCE monster2
+  // 2,0 to 2,-1
   
 Cutscenes:
+  Guard:
+    file: images/characters/guard_port.bmp
+    width: 0
+    height: 0
+    
+  Player:
+    file: images/characters/player_port.bmp
+    width: 0
+    height: 0
+    
+  HelloSound:
+    file: sounds/guard/hello.wav
+    
+  LookingForMonsters:
+    file: sounds/player/looking_for_monsters.wav
+    
+  SouthSound:
+    file: sounds/guard/south_of_town.wav
+    
+  Scene 1:
+    Guard says "Hello" to Player
+    Play sound HelloSound
+    
+    Player says "Hi, I'm looking for the monsters that plauge your town." to Guard
+    Play sound LookingForMonsters
+    
+    Guard says "Just to the south of town, sir."
+    Play sound SouthSound

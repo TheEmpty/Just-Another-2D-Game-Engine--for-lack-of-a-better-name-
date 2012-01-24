@@ -14,6 +14,7 @@
 		11A3F16214B6A63400527FF0 /* SelectState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11A3F16014B6A63400527FF0 /* SelectState.cpp */; };
 		11A3F16714B6C1A600527FF0 /* maps in Resources */ = {isa = PBXBuildFile; fileRef = 11A3F16614B6C1A600527FF0 /* maps */; };
 		11A3F16914B6CAC900527FF0 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 11A3F16814B6CAC900527FF0 /* images */; };
+		11B13B7C14C5EA2C00579BF0 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11B13B7B14C5EA2C00579BF0 /* Player.cpp */; };
 		11C16C8714A81BA100653A8A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7114A81BA100653A8A /* Camera.cpp */; };
 		11C16C8814A81BA100653A8A /* Credits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7314A81BA100653A8A /* Credits.cpp */; };
 		11C16C8914A81BA100653A8A /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11C16C7814A81BA100653A8A /* Helper.cpp */; };
@@ -28,6 +29,7 @@
 		11C16C9814A8235C00653A8A /* SDL_ttf.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 11C16C9614A8234600653A8A /* SDL_ttf.framework */; };
 		11C16C9A14A8237E00653A8A /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C16C9914A8237E00653A8A /* SDL.framework */; };
 		11C16C9B14A8238200653A8A /* SDL.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 11C16C9914A8237E00653A8A /* SDL.framework */; };
+		11FA28B314C3A92700D67298 /* InvisableRectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11FA28B214C3A92700D67298 /* InvisableRectangle.cpp */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,7 @@
 		11A3F16414B6A63E00527FF0 /* SelectState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectState.h; path = Platformer/SelectState.h; sourceTree = "<group>"; };
 		11A3F16614B6C1A600527FF0 /* maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = maps; path = Release/maps; sourceTree = "<group>"; };
 		11A3F16814B6CAC900527FF0 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = Release/images; sourceTree = "<group>"; };
+		11B13B7B14C5EA2C00579BF0 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = Platformer/Player.cpp; sourceTree = "<group>"; };
 		11C16C7114A81BA100653A8A /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = Platformer/Camera.cpp; sourceTree = "<group>"; };
 		11C16C7214A81BA100653A8A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = Platformer/Camera.h; sourceTree = "<group>"; };
 		11C16C7314A81BA100653A8A /* Credits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Credits.cpp; path = Platformer/Credits.cpp; sourceTree = "<group>"; };
@@ -85,6 +88,10 @@
 		11C16C9614A8234600653A8A /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL_ttf.framework; sourceTree = "<group>"; };
 		11C16C9914A8237E00653A8A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL.framework; sourceTree = "<group>"; };
 		11C16C9C14A8255B00653A8A /* SDL_ttf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_ttf.h; path = Platformer/include/SDL_ttf.h; sourceTree = "<group>"; };
+		11FA28B014C2764E00D67298 /* InvisableRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvisableRectangle.h; path = Platformer/InvisableRectangle.h; sourceTree = "<group>"; };
+		11FA28B114C2768000D67298 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameObject.h; path = Platformer/GameObject.h; sourceTree = "<group>"; };
+		11FA28B214C3A92700D67298 /* InvisableRectangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InvisableRectangle.cpp; path = Platformer/InvisableRectangle.cpp; sourceTree = "<group>"; };
+		11FA28B414C512E700D67298 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Platformer/Player.h; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -108,21 +115,15 @@
 		080E96DDFE201D6D7F000001 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				11C16C7214A81BA100653A8A /* Camera.h */,
 				11C16C7414A81BA100653A8A /* Credits.h */,
-				11C16C7514A81BA100653A8A /* GameState.h */,
-				11C16C7614A81BA100653A8A /* GameStateHelper.h */,
 				11C16C7714A81BA100653A8A /* globals.h */,
-				11C16C7914A81BA100653A8A /* Helper.h */,
 				11C16C7B14A81BA100653A8A /* Intro.h */,
-				11C16C7E14A81BA100653A8A /* Map.h */,
 				11C16C8014A81BA100653A8A /* Menu.h */,
+				11FA28B414C512E700D67298 /* Player.h */,
 				11A3F16314B6A63E00527FF0 /* PlayState.h */,
 				11A3F16414B6A63E00527FF0 /* SelectState.h */,
-				11C16C8114A81BA100653A8A /* SDLMain.h */,
 				11C16C8414A81BA100653A8A /* Timer.h */,
 				11C16C8614A81BA100653A8A /* Title.h */,
-				111E7B0114AA326900FE1C40 /* Window.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -146,22 +147,56 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		11D3DEF714B3EF3C00ECC6EC /* Implementations */ = {
+		11A7F12814CDDAE8006A1FFE /* Just Another 2D Game Engine */ = {
+			isa = PBXGroup;
+			children = (
+				11A7F12B14CDDB03006A1FFE /* Headers */,
+				11A7F12A14CDDAF1006A1FFE /* CPP */,
+			);
+			name = "Just Another 2D Game Engine";
+			sourceTree = "<group>";
+		};
+		11A7F12A14CDDAF1006A1FFE /* CPP */ = {
 			isa = PBXGroup;
 			children = (
 				11C16C7114A81BA100653A8A /* Camera.cpp */,
-				11C16C7314A81BA100653A8A /* Credits.cpp */,
 				11C16C7814A81BA100653A8A /* Helper.cpp */,
+				11FA28B214C3A92700D67298 /* InvisableRectangle.cpp */,
+				11C16C7D14A81BA100653A8A /* Map.cpp */,
+				11C16C8214A81BA100653A8A /* SDLMain.m */,
+				111E7AFE14AA325F00FE1C40 /* Window.cpp */,
+			);
+			name = CPP;
+			sourceTree = "<group>";
+		};
+		11A7F12B14CDDB03006A1FFE /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				11C16C7214A81BA100653A8A /* Camera.h */,
+				11FA28B114C2768000D67298 /* GameObject.h */,
+				11C16C7514A81BA100653A8A /* GameState.h */,
+				11C16C7614A81BA100653A8A /* GameStateHelper.h */,
+				11C16C7914A81BA100653A8A /* Helper.h */,
+				11FA28B014C2764E00D67298 /* InvisableRectangle.h */,
+				11C16C7E14A81BA100653A8A /* Map.h */,
+				11C16C8114A81BA100653A8A /* SDLMain.h */,
+				111E7B0114AA326900FE1C40 /* Window.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		11D3DEF714B3EF3C00ECC6EC /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				11C16C7314A81BA100653A8A /* Credits.cpp */,
 				11C16C7A14A81BA100653A8A /* Intro.cpp */,
 				11C16C7C14A81BA100653A8A /* main.cpp */,
-				11C16C7D14A81BA100653A8A /* Map.cpp */,
 				11C16C7F14A81BA100653A8A /* Menu.cpp */,
+				11B13B7B14C5EA2C00579BF0 /* Player.cpp */,
 				11A3F15F14B6A63400527FF0 /* PlayState.cpp */,
 				11A3F16014B6A63400527FF0 /* SelectState.cpp */,
-				11C16C8214A81BA100653A8A /* SDLMain.m */,
 				11C16C8314A81BA100653A8A /* Timer.cpp */,
 				11C16C8514A81BA100653A8A /* Title.cpp */,
-				111E7AFE14AA325F00FE1C40 /* Window.cpp */,
 			);
 			name = Implementations;
 			sourceTree = "<group>";
@@ -177,12 +212,13 @@
 		29B97314FDCFA39411CA2CEA /* ___PROJECTNAMEASXML___ */ = {
 			isa = PBXGroup;
 			children = (
+				11A7F12814CDDAE8006A1FFE /* Just Another 2D Game Engine */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
 				11D3DEF714B3EF3C00ECC6EC /* Implementations */,
 				080E96DDFE201D6D7F000001 /* Headers */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = "___PROJECTNAMEASXML___";
 			sourceTree = "<group>";
@@ -296,6 +332,8 @@
 				111E7AFF14AA325F00FE1C40 /* Window.cpp in Sources */,
 				11A3F16114B6A63400527FF0 /* PlayState.cpp in Sources */,
 				11A3F16214B6A63400527FF0 /* SelectState.cpp in Sources */,
+				11FA28B314C3A92700D67298 /* InvisableRectangle.cpp in Sources */,
+				11B13B7C14C5EA2C00579BF0 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

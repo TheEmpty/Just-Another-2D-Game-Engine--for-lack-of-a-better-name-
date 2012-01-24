@@ -79,11 +79,13 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="dirent.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateHelper.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Intro.h" />
+    <ClInclude Include="InvisableRectangle.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PlayState.h" />

@@ -13,7 +13,7 @@
 #include "SDL_ttf.h"
 #include "Timer.h"
 
-class Intro : public GameState
+class Intro : public JA2GE::GameState
 {
 private:
     // Background image surface
@@ -23,7 +23,7 @@ private:
     // Font that will be used
     TTF_Font** font;
     // State managment
-    GameStateHelper* state_helper;
+    JA2GE::GameStateHelper* state_helper;
     // If the user doesn't click or press any button, we'll forward them based on the ticks since state started.
     Timer wait;
 
@@ -43,19 +43,19 @@ public:
     /**
      * @brief Handle "events" generally user input.
      */
-    void handle_event(const Window* window, SDL_Event* anEvent);
+    void handle_event(const JA2GE::Window* window, SDL_Event* anEvent);
 
     /**
      * @brief Handle any logic such as physics or autosave.
      */
-    void logic( const Window* window );
+    void logic( const JA2GE::Window* window );
 
     /**
      * @brief Renders graphics to the supplied surface.
      *
      * @param screen The SDL_Surface to draw on, generally the surface initalized by SDL.
      */
-    void render( const Window* window );
+    void render( const JA2GE::Window* window );
     
     void get_message( int command, std::string* response ) {};
 };

@@ -5,61 +5,63 @@
  * @author Mohammad El-Abid
  */
 
-#ifndef GAME_STATE_HELPER_H
-#define GAME_STATE_HELPER_H
+#ifndef JUST_ANOTHER_2D_GAME_ENGINE_GAME_STATE_HELPER_H
+#define JUST_ANOTHER_2D_GAME_ENGINE_GAME_STATE_HELPER_H
 
 #include "GameState.h"
 #include "globals.h"
 
-class GameState;
+namespace JA2GE {
 
-class GameStateHelper
-{
-private:
-    /**
-     * @brief Initalize the states to NULL.
-     */
-    GameStateHelper()
+    class GameState; // forward decleration
+
+    class GameStateHelper
     {
-        stateID = STATE_NULL;
-        nextState = STATE_NULL;
-        currentState = NULL;
+    private:
+        /**
+         * @brief Initalize the states to NULL.
+         */
+        GameStateHelper()
+        {
+            stateID = STATE_NULL;
+            nextState = STATE_NULL;
+            currentState = NULL;
+        };
+
+        /**
+         * @brief Prevent copy-construction.
+         */
+        GameStateHelper( const GameStateHelper& );
+
+        /**
+         * @brief Prevent assignment/overwrite.
+         */
+        GameStateHelper& operator=( const GameStateHelper& );
+
+    public:
+        /**
+         * @brief Get a pointer singleton instance.
+         */
+        static GameStateHelper* Instance()
+        {
+            static GameStateHelper singleton;
+            return &singleton;
+        }
+
+        // Current state ID.
+        int stateID;
+        // Set to the next state ID, waiting to be proccessed by external code.
+        int nextState;
+
+        /**
+         * @breif Pointer to current state object.
+         */
+        GameState* currentState;
+
+        /**
+         * @brief Change the next state ID, thus queueing the change. But don't overwrite an exit state
+         */
+        void set_next_state( int newState ) { if( nextState != STATE_EXIT ) nextState = newState; }
     };
-
-    /**
-     * @brief Prevent copy-construction.
-     */
-    GameStateHelper( const GameStateHelper& );
-
-    /**
-     * @brief Prevent assignment/overwrite.
-     */
-    GameStateHelper& operator=( const GameStateHelper& );
-
-public:
-    /**
-     * @brief Get a pointer singleton instance.
-     */
-    static GameStateHelper* Instance()
-    {
-        static GameStateHelper singleton;
-        return &singleton;
-    }
-
-    // Current state ID.
-    int stateID;
-    // Set to the next state ID, waiting to be proccessed by external code.
-    int nextState;
-
-    /**
-     * @breif Pointer to current state object.
-     */
-    GameState* currentState;
-
-    /**
-     * @brief Change the next state ID, thus queueing the change. But don't overwrite an exit state
-     */
-    void set_next_state( int newState ) { if( nextState != STATE_EXIT ) nextState = newState; }
-};
-
-#endif // GAME_STATE_HELPER_H
+}
+#endif // JUST_ANOTHER_2D_GAME_ENGINE_GAME_STATE_HELPER_H

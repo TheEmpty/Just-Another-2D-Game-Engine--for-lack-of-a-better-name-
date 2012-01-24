@@ -9,7 +9,7 @@
 
 Credits::Credits( int prev, TTF_Font** newFont, int newPadding )
 {
-    state_helper = GameStateHelper::Instance();
+    state_helper = JA2GE::GameStateHelper::Instance();
     prev_state = prev;
     backgroundColor = 0;
     font = newFont;
@@ -26,10 +26,10 @@ void Credits::create_messages()
         message[i] = SDL_CreateRGBSurface(0,0,0,0,0,0,0,0);
     
     message[0] = TTF_RenderText_Solid( *font, "Credits", defaultFontColor );
-    message[1] = TTF_RenderText_Solid( *font, "Mohammad El-Abid - Developer", defaultFontColor );
+    message[1] = TTF_RenderText_Solid( *font, "Mohammad El-Abid - Developer & Designer", defaultFontColor );
     message[2] = TTF_RenderText_Solid( *font, "Lazy Foo for his tutorials", defaultFontColor );
     message[3] = TTF_RenderText_Solid( *font, "Joe Prince for the 'Squada One' font", defaultFontColor );
-    message[4] = NULL; // blank line, takes height of previous message
+    message[4] = TTF_RenderText_Solid( *font, "And you, for playing my first C++ app", defaultFontColor);
     message[5] = NULL; // blank line, takes height of previous message
     message[6] = TTF_RenderText_Solid( *font, "Back", activeFontColor );
 }
@@ -42,7 +42,7 @@ Credits::~Credits()
     delete [] message;
 }
 
-void Credits::logic( const Window* window )
+void Credits::logic( const JA2GE::Window* window )
 {
     if( window->screenChange )
     {
@@ -50,7 +50,7 @@ void Credits::logic( const Window* window )
     }
 }
 
-void Credits::handle_event(const Window* window, SDL_Event* anEvent)
+void Credits::handle_event(const JA2GE::Window* window, SDL_Event* anEvent)
 {
     // was it a key?
     if( anEvent->type == SDL_KEYDOWN )
@@ -64,7 +64,7 @@ void Credits::handle_event(const Window* window, SDL_Event* anEvent)
     }
 }
 
-void Credits::render( const Window* window )
+void Credits::render( const JA2GE::Window* window )
 {
     if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
     SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
@@ -81,7 +81,7 @@ void Credits::render( const Window* window )
         if( message[i] != NULL )
         {
             x = ( window->get_width() - message[i]->w ) / 2; // center it
-            Helper::apply_surface( x, y, message[i], window->get_screen() );
+            JA2GE::Helper::apply_surface( x, y, message[i], window->get_screen() );
             y += message[i]->h + padding;
         }
         else

@@ -6,6 +6,9 @@
          contextName = "Map::parse_from_line(std::string*):Map.cpp">
          <PersistentStrings>
             <PersistentString
+               value = "*arguments @ 4">
+            </PersistentString>
+            <PersistentString
                value = "*keyv @ 2">
             </PersistentString>
          </PersistentStrings>

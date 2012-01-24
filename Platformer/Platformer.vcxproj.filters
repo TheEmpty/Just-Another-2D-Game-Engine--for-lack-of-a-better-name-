@@ -63,6 +63,12 @@
     <ClInclude Include="dirent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InvisableRectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helper.cpp">

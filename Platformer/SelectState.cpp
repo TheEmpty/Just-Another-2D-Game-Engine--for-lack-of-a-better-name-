@@ -12,7 +12,7 @@
 SelectState::SelectState(TTF_Font** newFont)
 {
     font = newFont;
-    state_helper = GameStateHelper::Instance();
+    state_helper = JA2GE::GameStateHelper::Instance();
     backgroundColor = 0;
     load_files();
 }
@@ -26,11 +26,11 @@ void SelectState::load_files()
 {
     // load files, make menu from files
     std::vector <std::string> files;
-    DIR *dp = opendir( Helper::get_path_for_resource("maps").c_str() );
+    DIR *dp = opendir( JA2GE::Helper::get_path_for_resource("maps").c_str() );
     struct dirent *dirp;
     
     if( dp == NULL ){
-        Helper::debug(150, "Unable to open folder %s.", Helper::get_path_for_resource("maps").c_str());
+        JA2GE::Helper::debug(150, "Unable to open folder %s.", JA2GE::Helper::get_path_for_resource("maps").c_str());
         menu = NULL;
     } else {
 
@@ -47,7 +47,7 @@ void SelectState::load_files()
     }
 }
 
-void SelectState::handle_event(const Window* window, SDL_Event* anEvent)
+void SelectState::handle_event(const JA2GE::Window* window, SDL_Event* anEvent)
 {
     if( anEvent->type == SDL_KEYDOWN )
     {
@@ -75,7 +75,7 @@ void SelectState::get_selected_file( std::string* file )
     file->append( menu->getText( menu->getPos() )->c_str() );
 }
 
-void SelectState::logic( const Window* window )
+void SelectState::logic( const JA2GE::Window* window )
 {
     if( window->screenChange )
         menu->redraw();
@@ -96,7 +96,7 @@ void SelectState::logic( const Window* window )
     }
 }
 
-void SelectState::render( const Window* window )
+void SelectState::render( const JA2GE::Window* window )
 {
     if( backgroundColor == 0 ) backgroundColor = SDL_MapRGB( window->get_screen()->format, 100, 99, 99 );
     SDL_FillRect( window->get_screen(), &window->get_screen()->clip_rect, backgroundColor );
@@ -120,7 +120,7 @@ void SelectState::render( const Window* window )
     {
         SDL_Surface *item = menu->getMenuItem( i );
         x = ( window->get_width() - item->w ) / 2; // center it
-        Helper::apply_surface( x, y, item, window->get_screen() );
+        JA2GE::Helper::apply_surface( x, y, item, window->get_screen() );
         y += item->h + 8;
         i++;
     }

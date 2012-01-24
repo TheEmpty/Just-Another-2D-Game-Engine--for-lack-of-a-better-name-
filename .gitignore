@@ -6,3 +6,6 @@ Platformer/Debug/*
 Platformer/Release/*
 .DS_Store
 xcuserdata
+.com.apple.*
+Release/stderr.txt
+Release/stdout.txt

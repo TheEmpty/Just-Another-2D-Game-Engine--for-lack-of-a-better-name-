@@ -5,32 +5,28 @@
  * @author Mohammad El-Abid
  */
 
-// THOUGHT: Menu with mouse would be nice, but rest of game doesn't use mouse (though perhaps RPGs would).
-// THOUGHT: in multiplayer, would the camera follow player 1 or find the midpoint of the everyone and prevent them from leaving camera?
-// RESPONSE: Just use 2 options on multiplayer cameras
-
-// Engine
-    // TODO: menu in PlayState
-    // TODO: parse "Tiles" section (physics)
-    // TODO: basic character class
-    // TODO: pass selected map from SelectState to PlayState
+// Engine  
+    // TODO: physics bug (Elements on the line x = 0 && y > 1 don't seem to collide)
+    // TODO: menu crashes when constently spawned/deleted (press escape a few times really quick in PlayState, should just render once)
     // TODO: bring documentation back upto date and consitency (learning C++ a lot here)
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
-    // TODO: load map (meta data, tileset(s) data, tile data (collision), map data
-    // TODO: Player in map (physics, control, gamepad, multiplayer)
+    // TODO: instead of "unmove" would be nice if it didn't move into the wall. So diagonal force would just ignore one force instead of both)
+    // TODO: gravity
+    // TODO: animation
+
+    // TODO: parse spawn and end points
+    // TODO: Gamepad
+    // TODO: multiplayer?
     // TODO: create maps
     // TODO: Event scripting
-    // TODO: Make intro a level where the character runs to the other side and it says "Press any key"
     // TODO: Cutscene scripting
     // TODO: AI Scripting
-    // TODO: audio
-    // TODO: Abstract classes and make it an engine not a game
-    // TODO: better sprites
+    // TODO: audio (like character.bump_sound = ... )
     // TODO: GameStateHelper should not be singleton, be prepared to allow multiple windows (SDL 1.3)
     // TODO: SDL 1.3, SDL 1.3 SDL_TTF, SDL 1.3 desktop width/height
 
 // Application 
-    // TODO: some way to set menu location when coming back from credits. Users won't expect it to change back to the top when they come back.
+    // TODO: An intro that is actually a level and a player running through it would be cool.
 
 #include "Camera.h"
 #include "Credits.h"
@@ -48,9 +44,10 @@
 #include "Window.h"
 #include "PlayState.h"
 #include "SelectState.h"
+#include "InvisableRectangle.h"
 #include <string>
 
-GameStateHelper* state_helper = GameStateHelper::Instance();
+JA2GE::GameStateHelper* state_helper = JA2GE::GameStateHelper::Instance();
 
 // Font stuff
 TTF_Font *font = NULL;
@@ -65,7 +62,7 @@ void change_state()
     if( state_helper->nextState != STATE_NULL )
     {
         
-        GameState* newState = NULL;
+        JA2GE::GameState* newState = NULL;
         
         // Change the state
         switch( state_helper->nextState )
@@ -116,7 +113,7 @@ int init()
         return 2;
 
     // Open our font
-    font = TTF_OpenFont( Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), 36 );
+    font = TTF_OpenFont( JA2GE::Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), 36 );
     if( font == NULL )
         return 3;
 
@@ -178,7 +175,7 @@ void setResourcePath( char executablePath[] )
 #if __APPLE__
     // Only Apple
     path = path.substr( 0, path.find_last_of( "/" ) ); // remove MacOS folder
-    Helper::resourcePath = path + "/Resources"; // add resources folder
+    JA2GE::Helper::resourcePath = path + "/Resources"; // add resources folder
 #endif
 }
 
@@ -203,7 +200,7 @@ int main( int argc, char* args[] )
     int desktopWidth = ptrVidInfo->current_w;
 
     // Create the main window
-    Window window = Window( SCREEN_TITLE );
+    JA2GE::Window window = JA2GE::Window( SCREEN_TITLE );
     if( window.error() )
         return 1;
     
@@ -234,7 +231,7 @@ int main( int argc, char* args[] )
         {
             int fontSize = ( window.get_width()/31 + window.get_height()/31 );
             
-            TTF_Font* newFont = TTF_OpenFont( Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), fontSize );
+            TTF_Font* newFont = TTF_OpenFont( JA2GE::Helper::get_path_for_resource( "Squada One.ttf" ).c_str(), fontSize );
             if( newFont != NULL )
             {
                 TTF_CloseFont( font );

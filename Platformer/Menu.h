@@ -68,7 +68,7 @@ public:
      */
     void setText( int index, std::string text );
 
-    const std::string* Menu::getText( int index );
+    const std::string* getText( int index );
 
     /**
      * @brief Used to calculate new selected item, useful when user presses up at top of list.
