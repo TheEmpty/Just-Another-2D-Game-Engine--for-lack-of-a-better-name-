@@ -9,7 +9,7 @@
 #define JUST_ANOTHER_2D_GAME_ENGINE_GAME_STATE_HELPER_H
 
 #include "GameState.h"
-#include "globals.h"
+#include "constants.h"
 
 namespace JA2GE {
 

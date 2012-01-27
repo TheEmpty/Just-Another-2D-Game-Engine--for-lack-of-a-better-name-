@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="constants.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="GameObject.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="InvisableRectangle.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SelectState.h" />
@@ -98,11 +100,13 @@
   <ItemGroup>
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="InvisableRectangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SelectState.cpp" />
     <ClCompile Include="Timer.cpp" />

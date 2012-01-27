@@ -16,7 +16,7 @@ PlayState::PlayState( TTF_Font** newFont, int prev, const char filename[] )
         player.init();
         map.moving_items.push_back( &player );
         // Create Menu
-        pausedMenu = new Menu( font, defaultFontColor, activeFontColor, 3 );
+        pausedMenu = new Menu( font, DEFAULT_FONT_COLOR, ACTIVE_FONT_COLOR, 3 );
         pausedMenu->setText( 0, "Resume" );
         pausedMenu->setText( 1, "Reselect" );
         pausedMenu->setText( 2, "Main Menu" );
@@ -135,13 +135,13 @@ void PlayState::render(const JA2GE::Window *window)
     else
     {
         // display error
-        SDL_Surface* error = TTF_RenderText_Solid( *font, map.get_error()->c_str(), defaultFontColor );
+        SDL_Surface* error = TTF_RenderText_Solid( *font, map.get_error()->c_str(), DEFAULT_FONT_COLOR );
         int x = ( window->get_width() - error->w )/2;
         int y = ( window->get_height() - error->h )/4;
         JA2GE::Helper::apply_surface( x, y, error, window->get_screen() );
         
         // display back
-        SDL_Surface* back = TTF_RenderText_Solid( *font, "Back", activeFontColor );
+        SDL_Surface* back = TTF_RenderText_Solid( *font, "Back", ACTIVE_FONT_COLOR );
         x = ( window->get_width() - back->w )/2;
         y += y * 2;
         JA2GE::Helper::apply_surface( x, y, back, window->get_screen() );

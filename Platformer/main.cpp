@@ -6,6 +6,7 @@
  */
 
 // Engine 
+    // TODO: JA2GE variables
     // TODO: bring documentation back upto date and consitency (learning C++ a lot here)
     // TODO: check definitions for any newb mistakes (passing in objects instead of pointers)
     // TODO: instead of "unmove" would be nice if it didn't move into the wall. So diagonal force would just ignore one force instead of both)
@@ -59,7 +60,7 @@ const int FONT_PADDING = 8;
 void change_state()
 {
     // If the state needs to be changed
-    if( state_helper->nextState != STATE_NULL )
+    if( state_helper->nextState != JA2GE::STATE_NULL )
     {
         
         JA2GE::GameState* newState = NULL;
@@ -86,14 +87,14 @@ void change_state()
         }
         
         // Delete previous/current state and switch states
-        if( state_helper->nextState != STATE_EXIT ){
+        if( state_helper->nextState != JA2GE::STATE_EXIT ){
             delete state_helper->currentState;
             // Move newState to currentState
             state_helper->currentState = newState; 
         }
         
         state_helper->stateID = state_helper->nextState;
-        state_helper->nextState = STATE_NULL;  
+        state_helper->nextState = JA2GE::STATE_NULL;  
     }
 }
 
@@ -170,7 +171,7 @@ void setResourcePath( char executablePath[] )
 
 #ifndef __APPLE__
     // Linux and Windows don't have resource folders
-    Helper::resourcePath = path;
+    JA2GE::Helper::resourcePath = path;
 #endif
 #if __APPLE__
     // Only Apple
@@ -218,7 +219,7 @@ int main( int argc, char* args[] )
     state_helper->currentState = new Intro(&font);
 
     // While the user hasn't quit
-    while( state_helper->stateID != STATE_EXIT && window.error() == false )
+    while( state_helper->stateID != JA2GE::STATE_EXIT && window.error() == false )
     {
         // Start the frame timer
         fps_cap.start();

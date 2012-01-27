@@ -22,20 +22,18 @@ const int KMOD_LCOMMAND = 1024;
 const int KMOD_RCOMMAND = 2048;
 
 // Font
-// TODO: why aren't these in CAPS!
-const SDL_Color defaultFontColor = {0, 0, 0};
-const SDL_Color activeFontColor  = {0, 122, 153};
+const SDL_Color DEFAULT_FONT_COLOR = {0, 0, 0};
+const SDL_Color ACTIVE_FONT_COLOR  = {0, 122, 153};
 
 // Game state ids
 enum GameStates
 {
-    STATE_NULL,
+    // NULL and EXIT are in JA2GE
     STATE_INTRO,
     STATE_TITLE,
     STATE_SELECT_MAP,
     STATE_MAP,
     STATE_CREDITS,
-    STATE_EXIT,
 };
 
 #endif // DEFINITIONS_H

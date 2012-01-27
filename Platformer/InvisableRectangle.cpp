@@ -3,6 +3,9 @@
 
 namespace JA2GE
 {
+    // TODO: seems in the GIT rollback I lost collides(GameObject &thing)
+    // which would move objects to non-collision, replacing unmove and
+    // collides for movement.
 
     bool InvisableRectangle::collides(GameObject &thing)
     {

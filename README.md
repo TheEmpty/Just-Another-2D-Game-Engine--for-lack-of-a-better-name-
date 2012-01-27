@@ -7,7 +7,7 @@ Currently there is no reason to pick my engine over any other 2D engine. Perhaps
 
 How Complete Is This Engine?
 ----------------------------
-Currently it's not much. Once the mapping class is done though, it should be ready for any other indie developer to take the engine and use it for their own game.
+It's a barebone 2D game engine. It can load a map, handle game states, and squared objects (circles soon).
 
 Can I Use This In My Commercial game?
 -------------------------------------
@@ -15,4 +15,4 @@ Yes, please remember that you must keep the license file bundled with your sourc
 
 What Systems Does It Support?
 -----------------------------
-Currently Windows, but Mac OS X is planned.
+Currently Windows and Mac OS X.

@@ -25,13 +25,13 @@ void Credits::create_messages()
     for( int i = 0; i < messages; i++ )
         message[i] = SDL_CreateRGBSurface(0,0,0,0,0,0,0,0);
     
-    message[0] = TTF_RenderText_Solid( *font, "Credits", defaultFontColor );
-    message[1] = TTF_RenderText_Solid( *font, "Mohammad El-Abid - Developer & Designer", defaultFontColor );
-    message[2] = TTF_RenderText_Solid( *font, "Lazy Foo for his tutorials", defaultFontColor );
-    message[3] = TTF_RenderText_Solid( *font, "Joe Prince for the 'Squada One' font", defaultFontColor );
-    message[4] = TTF_RenderText_Solid( *font, "And you, for playing my first C++ app", defaultFontColor);
+    message[0] = TTF_RenderText_Solid( *font, "Credits", DEFAULT_FONT_COLOR );
+    message[1] = TTF_RenderText_Solid( *font, "Mohammad El-Abid - Developer & Designer", DEFAULT_FONT_COLOR );
+    message[2] = TTF_RenderText_Solid( *font, "Lazy Foo for his tutorials", DEFAULT_FONT_COLOR );
+    message[3] = TTF_RenderText_Solid( *font, "Joe Prince for the 'Squada One' font", DEFAULT_FONT_COLOR );
+    message[4] = TTF_RenderText_Solid( *font, "And you, for playing my first C++ app", DEFAULT_FONT_COLOR);
     message[5] = NULL; // blank line, takes height of previous message
-    message[6] = TTF_RenderText_Solid( *font, "Back", activeFontColor );
+    message[6] = TTF_RenderText_Solid( *font, "Back", ACTIVE_FONT_COLOR );
 }
 
 Credits::~Credits()

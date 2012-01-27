@@ -17,7 +17,7 @@ Title::Title( TTF_Font** newFont, int newPadding )
     backgroundColor = 0;
     
     // Menu
-    menu = new Menu( font, defaultFontColor, activeFontColor, 4 );
+    menu = new Menu( font, DEFAULT_FONT_COLOR, ACTIVE_FONT_COLOR, 4 );
     menu->setText( 0, "Load Map" );
     menu->setText( 1, "Create Map" );
     menu->setText( 2, "Credits" );
@@ -37,7 +37,7 @@ void Title::handle_event(const JA2GE::Window* window, SDL_Event* anEvent)
         switch( anEvent->key.keysym.sym )
         {
             case( SDLK_ESCAPE ):
-                state_helper->set_next_state( STATE_EXIT );
+                state_helper->set_next_state( JA2GE::STATE_EXIT );
                 break;
             case( SDLK_UP ):
             case( SDLK_DOWN ):
@@ -54,7 +54,7 @@ void Title::handle_event(const JA2GE::Window* window, SDL_Event* anEvent)
                         state_helper->set_next_state( STATE_CREDITS );
                         break;
                     case( 3 ):
-                        state_helper->set_next_state( STATE_EXIT );
+                        state_helper->set_next_state( JA2GE::STATE_EXIT );
                         break;
                 }
                 break;

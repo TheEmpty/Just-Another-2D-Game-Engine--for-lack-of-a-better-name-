@@ -41,7 +41,7 @@ void SelectState::load_files()
 
         closedir(dp);
         
-        menu = new Menu( font, defaultFontColor, activeFontColor, files.size());
+        menu = new Menu( font, DEFAULT_FONT_COLOR, ACTIVE_FONT_COLOR, files.size());
         
         for( int i = 0; i < files.size(); i++ ) menu->setText(i, files[i]);
     }

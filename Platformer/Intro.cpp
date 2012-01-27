@@ -14,7 +14,7 @@ Intro::Intro( TTF_Font** newFont ) // take font
 
     //Load the background
     background = JA2GE::Helper::load_image( JA2GE::Helper::get_path_for_resource("images/intro.bmp").c_str() );
-    message = TTF_RenderText_Solid( *font, "Version 0.0.5", defaultFontColor );
+    message = TTF_RenderText_Solid( *font, "Version 0.0.5", DEFAULT_FONT_COLOR );
 
     //Monitor how long they have looked at the version
     wait.start();
